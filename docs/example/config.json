@@ -1,14 +1,19 @@
 {
-    "database":
-    {
-        "backend": "json",
-        "path": {
-            "source": "data/source.json",
-            "download": "data/download.json",
-            "bangumi_moe": "data/bangumi_moe.json"
+    "database": {
+        "source": {
+            "backend": "json",
+            "path": "data/source.json"
+        },
+        "download": {
+            "backend": "json",
+            "path": "data/download.json"
+        },
+        "bangumi_moe": {
+            "backend": "json",
+            "path": "data/bangumi_moe.json"
         }
     },
-    "path":{
+    "path": {
         "source": "/files/Downloads/Anima",
         "target": "/files/Media"
     },
