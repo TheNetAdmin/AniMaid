@@ -1,6 +1,7 @@
 import requests
 from dateutil.parser import parse as parse_time
 from src.database import source_database
+import re
 
 def save_team(url: str, source_db):
     if url.startswith('https') and 'torrent' not in url:
@@ -34,10 +35,16 @@ def save_team(url: str, source_db):
         return local_team
     
     print(f'Please give this team a unique alias in English,')
-    print(f'    you may use the first label in this anima filename if necessary:')
-    print(f'    {response["content"][0][0]}')
-    team_alias = input('Input the team alias:')
+    filename = response["content"][0][0]
+    print(f'    filename: {filename}')
+    auto_alias = re.findall(r'\[[\w\s-]+\]', filename)[0]
+    if auto_alias:
+        auto_alias = auto_alias.replace('[','').replace(']','').replace(' ', '_')
+    team_alias = input(f'Input the team alias [{auto_alias}]:')
     team_alias = team_alias.strip()
+    if len(team_alias) == 0:
+        team_alias = auto_alias
+    team['alias'] = team_alias
 
     # TODO: Check if alias is unique
     source_db.add_team(team)
