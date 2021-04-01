@@ -1,0 +1,53 @@
+{
+    "path": {
+        "ongoing": "AnimaOngoing",
+        "bundle": "Anima"
+    },
+    "filter": {
+        "default": [],
+        "bundle": [],
+        "ongoing": [
+            {
+                "exclude": {
+                    "word": [
+                        "合集"
+                    ]
+                }
+            }
+        ],
+        "2021Winter": [
+            {
+                "include": {
+                    "date": [
+                        "2021-01-01T00:00:00.000Z",
+                        "2021-04-15T00:00:00.000Z"
+                    ]
+                }
+            }
+        ]
+    },
+    "track": [
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2021Winter"
+            ],
+            "follow": [
+                {
+                    "name": "悠哉日常大王.*1080[pP].*60FPS",
+                    "regex": true,
+                    "filter": [
+                        {
+                            "exclude": {
+                                "word": [
+                                    "繁日內嵌"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

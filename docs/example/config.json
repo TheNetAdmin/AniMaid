@@ -1,0 +1,28 @@
+{
+    "database":
+    {
+        "backend": "json",
+        "path": {
+            "source": "data/source.json",
+            "download": "data/download.json",
+            "bangumi_moe": "data/bangumi_moe.json"
+        }
+    },
+    "path":{
+        "source": "/files/Downloads/Anima",
+        "target": "/files/Media"
+    },
+    "downloader": "qbittorrent",
+    "slack": true,
+    "plex": true,
+    "logging": {
+        "default": {
+            "backend": "file",
+            "path": "log/animaid.log"
+        },
+        "crash": {
+            "backend": "file",
+            "path": "log/crash.log"
+        }
+    }
+}

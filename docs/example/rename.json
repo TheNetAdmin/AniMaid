@@ -1,0 +1,211 @@
+{
+    "filter": {
+        "media_file_extension": {
+            "include": {
+                "extension": [
+                    ".mkv",
+                    ".mka",
+                    ".ass",
+                    ".mp4"
+                ]
+            }
+        },
+        "ignore_special_dir": {
+            "exclude": {
+                "filename": [
+                    "SPs",
+                    "Scans"
+                ]
+            }
+        }
+    },
+    "file": {
+        "rename": true,
+        "filter": [
+            "media_file_extension"
+        ]
+    },
+    "dir": {
+        "rename": true,
+        "filter": [
+            "ignore_special_dir"
+        ]
+    },
+    "rule": [
+        {
+            "description": "Remove team name",
+            "type": "remove",
+            "regex": true,
+            "prefix": "\\s*\\[.*?",
+            "suffix": ".*?\\]\\s*",
+            "entries": [
+                "VCB",
+                "FLsnow",
+                "LoliHouse",
+                "Lilith-Raws",
+                "DD",
+                "XKsub",
+                "Sakurato",
+                "Beelzebub",
+                "Moozzi2",
+                "Kamigami",
+                "HYSUB",
+                "POPGO",
+                "DMG",
+                "SFEO-Raws",
+                "ANK-Raws",
+                "NC-Raws",
+                "Snow-Raws",
+                "SumiSora",
+                "TUcaptions",
+                "YYDM-11FANS",
+                "UHA-WINGS&LoliHouse",
+                "Nekomoe kissaten[(&LoliHouse)]"
+            ]
+        },
+        {
+            "description": "Remove video source",
+            "type": "remove",
+            "regex": true,
+            "prefix": "\\s*\\[.*?",
+            "suffix": ".*?\\]\\s*",
+            "entries": [
+                "BiliBili",
+                "Baha"
+            ]
+        },
+        {
+            "description": "Remove labels in brackets",
+            "type": "remove",
+            "regex": true,
+            "prefix": "\\s*\\[.*?",
+            "suffix": ".*?\\]\\s*",
+            "entries": [
+                "(1080)[pP]",
+                "Ma10[pP]",
+                "BDRip",
+                "WebRip",
+                "HEVC",
+                "MKV",
+                "MP4",
+                "GB_MP4",
+                "x26[54]",
+                "H264",
+                "WEB",
+                "AVC",
+                "CHT",
+                "CHS",
+                "JPSC",
+                "JPTC",
+                "SRT",
+                "1280X720",
+                "1080[pP]_Ma10P",
+                "1080[pP]_Hi10P",
+                "720[pP]",
+                "1920[xX]1080",
+                "BD[Rr][Ii][Pp][\\-\\s\\w\\d\\_]*",
+                "[(Ma)(Hi)]*10p_[(2160)(1080)(720)]*p[\\_\\w]*",
+                "x264_[2]*flac",
+                "[xX]264_AAC",
+                "x265_[2]*flac",
+                "x265_ac3",
+                "x265_flac_ac3",
+                "x265_flac_[2]*aac",
+                "AVC_AAC",
+                "AVC_FLAC[xX2]*",
+                "[0-9A-F]{8}",
+                "WEBRIP",
+                "Movie[\\w\\(\\)\\.\\s]*",
+                "H264_FLAC",
+                "HEVC[\\s\\w\\d]*FLAC",
+                "HEVC_ALS",
+                "BD"
+            ]
+        },
+        {
+            "description": "Remove labels in parentheses",
+            "type": "remove",
+            "regex": true,
+            "prefix": "\\s*\\(.*?",
+            "suffix": ".*?\\)\\s*",
+            "entries": [
+                "BD",
+                "DVD",
+                "[0-9A-F]{8}"
+            ]
+        },
+        {
+            "description": "Remove other labels",
+            "type": "remove",
+            "regex": true,
+            "prefix": "\\s*",
+            "suffix": "\\s*",
+            "entries": [
+                "\\.HKG\\&X2",
+                "\\.EMD\\&HKG",
+                "\\.HKG",
+                "(\\s)*「.*」(\\s)*",
+                "\\[資金募集中\\]",
+                "\\[[简繁].*?\\]",
+                "\\[招.*?\\]",
+                "YY-",
+                "\\.JYFanSub-",
+                "\\ V2"
+            ]
+        },
+        {
+            "description": "Check renaming results",
+            "type": "check",
+            "regex": true,
+            "entries": [
+                "\\[.*?[^0-9OvVAD].*?\\]",
+                "\\(.*?[^0-9OvVAD].*?\\)"
+            ]
+        },
+        {
+            "description": "Remove symbols",
+            "type": "remove",
+            "regex": false,
+            "entries": [
+                "[",
+                "]",
+                "_",
+                " - ",
+                "-",
+                "～",
+                "~",
+                ":",
+                ";",
+                "：",
+                "!",
+                "/",
+                "／",
+                "？"
+            ]
+        },
+        {
+            "description": "Shrink spaces",
+            "type": "transform",
+            "regex": false,
+            "entries": [
+                {
+                    "source": " .",
+                    "target": "."
+                },
+                {
+                    "source": "  ",
+                    "target": " "
+                }
+            ]
+        },
+        {
+            "description": "Remove spaces",
+            "type": "remove",
+            "regex": true,
+            "entries": [
+                "^\\s+",
+                "\\s+$"
+            ]
+        }
+    ]
+}
