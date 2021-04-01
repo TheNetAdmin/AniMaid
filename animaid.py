@@ -2,7 +2,7 @@ import click
 import json
 from pathlib import Path
 from src.utils import working_directory, check_and_copy
-from src.bangumi_moe import save_team
+from src.site import bangumi_moe_site
 from src.database import source_database
 
 def setup(args, config_path=None):
@@ -58,7 +58,11 @@ def install(ctx, config_path):
 @click.option('-u', '--url', required=True)
 @click.pass_context
 def add_team(ctx, url):
-    team = save_team(url, ctx.obj['data']['source'])
+    site = bangumi_moe_site()
+    team = site.parse_team(url)
+    source_db = ctx.obj['data']['source']
+    source_db.insert(team)
+    team = source_db.search(team)
     print(f'Team record in "source" database: {team}')
 
 if __name__ == '__main__':

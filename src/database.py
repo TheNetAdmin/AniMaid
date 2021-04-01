@@ -44,7 +44,7 @@ class source_database():
     def __init__(self, config, secret):
         self.backend = make_backend(config, secret)
     
-    def search_team(self, team) -> dict:
+    def search(self, team) -> dict:
         if self.backend.type == 'json':
             for entry in self.backend.data:
                 for src in entry['source']:
@@ -52,8 +52,8 @@ class source_database():
                         return entry
         return None
     
-    def add_team(self, team):
-        if self.search_team(team) is not None:
+    def insert(self, team):
+        if self.search(team) is not None:
             pass
         if self.backend.type == 'json':
             self.backend.data.append(team)
