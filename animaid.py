@@ -2,8 +2,8 @@ import click
 import json
 from pathlib import Path
 from src.utils import working_directory, check_and_copy
-from src.site import bangumi_moe_site
-from src.database import source_database
+from src.anima_site import bangumi_moe_site
+from src.database import source_database, bangumi_moe_database
 
 def setup(args, config_path=None):
     # 1. Creating example config files if not exists
@@ -43,7 +43,8 @@ def animaid(ctx, config, secret, rename, record):
         with open(ctx.obj[f'{file_type}_file']) as f:
             ctx.obj[file_type] = json.load(f)
     ctx.obj['data'] = {
-        "source": source_database(ctx.obj['config']['data']['source'], secret)
+        'source': source_database(ctx.obj['config']['data']['source'], secret),
+        'bangumi_moe': bangumi_moe_database(ctx.obj['config']['data']['bangumi_moe'], secret)
     }
 
 @animaid.command()
@@ -64,6 +65,22 @@ def add_team(ctx, url):
     source_db.insert(team)
     team = source_db.search(team)
     print(f'Team record in "source" database: {team}')
+
+@animaid.command()
+@click.option('-t', '--anima_type', default='ongoing', required=True)
+@click.option('-p', '--page', default=2, required=True)
+@click.option('-f', '--force', is_flag=True)
+@click.pass_context
+def update(ctx, anima_type, page, force):
+    if anima_type not in ['ongoing', 'bundle']:
+        raise Exception(f"Unknown anima type: {anima_type}")
+    # 1. Update teams' all recent records from bangumi.moe
+    source_db = ctx.obj['data']['source']
+    bangumi_moe_db = ctx.obj['data']['bangumi_moe']
+    for team in source_db.all():
+        bangumi_moe_db.update(team=team, page=page, force=force)
+    # 2. Parse user-defined record rules and find corresponding recent records
+    # 3. Write discovered records to download database
 
 if __name__ == '__main__':
     animaid()

@@ -1,6 +1,5 @@
 import requests
 from dateutil.parser import parse as parse_time
-from src.database import source_database
 import re
 
 
