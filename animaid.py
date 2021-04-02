@@ -1,11 +1,14 @@
 import click
 import json
+import logging
+import traceback
 from pathlib import Path
 from src.utils import working_directory, check_and_copy
 from src.anima_site import bangumi_moe_site
 from src.database import source_database, bangumi_moe_database
+from src.log import setup_log
 
-def setup(args, config_path=None):
+def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
     # TODO: use curr_path relative to this python script
     curr_path = Path.cwd()
@@ -38,10 +41,15 @@ def animaid(ctx, config, secret, rename, record):
     ctx.obj['secret_file'] = Path(secret)
     ctx.obj['rename_file'] = Path(rename)
     ctx.obj['record_file'] = Path(record)
-    setup(ctx.obj)
+    # Setup directory and read config files
+    setup_config(ctx.obj)
     for file_type in ['config', 'secret', 'rename', 'record']:
         with open(ctx.obj[f'{file_type}_file']) as f:
             ctx.obj[file_type] = json.load(f)
+    # Setup log
+    setup_log(ctx.obj['config']['logging'], ctx.obj['secret'])
+    ctx.obj['logger'] = logging.getLogger('animaid')
+    # Read databases
     ctx.obj['data'] = {
         'source': source_database(ctx.obj['config']['data']['source'], secret),
         'bangumi_moe': bangumi_moe_database(ctx.obj['config']['data']['bangumi_moe'], secret)
@@ -51,7 +59,7 @@ def animaid(ctx, config, secret, rename, record):
 @click.pass_context
 def install(ctx, config_path):
     print(f'Installing animaid')
-    setup(ctx.obj)
+    setup_config(ctx.obj)
     print(f'Installation done')
 
 
@@ -64,7 +72,7 @@ def add_team(ctx, url):
     source_db = ctx.obj['data']['source']
     source_db.insert(team)
     team = source_db.search(team)
-    print(f'Team record in "source" database: {team}')
+    ctx.obj['logger'].info(f'Team record in source database: {team}')
 
 @animaid.command()
 @click.option('-t', '--anima_type', default='ongoing', required=True)
@@ -82,5 +90,18 @@ def update(ctx, anima_type, page, force):
     # 2. Parse user-defined record rules and find corresponding recent records
     # 3. Write discovered records to download database
 
+@animaid.command()
+@click.pass_context
+def test(ctx):
+    logger = logging.getLogger()
+    logger.info("Test from animaid top module")
+    logging.getLogger('animaid').info('Test animaid logger')
+    raise Exception("Test exception")
+
 if __name__ == '__main__':
-    animaid()
+    try:
+        animaid()
+    except Exception as e:
+        logger = logging.getLogger('animaid.crash')
+        logger.error(traceback.format_exc())
+        logger.error(e)
