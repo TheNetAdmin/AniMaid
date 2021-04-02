@@ -56,6 +56,10 @@ class base_database():
 
 
 class download_database(base_database):
+    def __init__(self, config, secret):
+        super().__init__(config, secret)
+        self.logger = logging.getLogger('animaid.download_database')
+
     def search(self, record: dict) -> dict:
         if self.backend.type == 'json':
             for entry in self.backend.data:
@@ -64,6 +68,28 @@ class download_database(base_database):
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
         return None
+    
+    def insert(self, record: dict):
+        if self.search(record) is not None:
+            return
+        if self.backend.type == 'json':
+            download_record = {
+                'record': {
+                    '_id': record['_id'],
+                    'site': 'bangumi_moe'
+                },
+                'downloader': 'qbittorrent',
+                'track_type': r['track_type'],
+                'title': r['title'],
+                'magenet': r['magnet'],
+                'magenet_hash': r['infoHash'],
+                'publish_time': r['publish_time'],
+                'download_status': 'needDownload'
+            }
+            self.backend.data.append(download_record)
+            self.logger.info(f'Found new record: {r["title"]}', extra={'record': {'id': r['_id'], 'title': r['title']}})
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
 
 
 class source_database(base_database):
@@ -180,7 +206,7 @@ class bangumi_moe_database(base_database):
                     succ = self.insert(r)
                     if not succ:
                         log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
-                                 'record_id': r['_id'], 'page': p})
+                                 'record': {'id': r['_id'], 'title': r['title']},  'page': p})
                         break
             # TODO: parse one more page to guarantee coverage
 

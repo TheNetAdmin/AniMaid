@@ -47,5 +47,7 @@ def get_follow_records(follow, bangumi_moe_db, source_db):
                 for f in rule['filter']:
                     rf = make_filter(f, global_filters)
                     rule_records = rf.apply(rule_records)
-            result_records += rule_records
+            for r in rule_records:
+                r['track_type'] = track['type']
+                result_records.append(r)
     return result_records

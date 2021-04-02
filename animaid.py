@@ -5,7 +5,7 @@ import traceback
 from pathlib import Path
 from src.utils import working_directory, check_and_copy
 from src.anima_site import bangumi_moe_site
-from src.database import source_database, bangumi_moe_database
+from src.database import source_database, bangumi_moe_database, download_database
 from src.log import setup_log
 from src.follow import get_follow_records
 
@@ -53,6 +53,7 @@ def animaid(ctx, config, secret, rename, follow):
     # Read databases
     ctx.obj['data'] = {
         'source': source_database(ctx.obj['config']['data']['source'], secret),
+        'download': download_database(ctx.obj['config']['data']['download'], secret),
         'bangumi_moe': bangumi_moe_database(ctx.obj['config']['data']['bangumi_moe'], secret)
     }
 
@@ -91,8 +92,9 @@ def update(ctx, anima_type, max_pages, force):
         source_db.update(team)
     # 2. Parse user-defined follow rules and find corresponding recent records
     records = get_follow_records(ctx.obj['follow'], bangumi_moe_db, source_db)
+    download_db = ctx.obj['data']['download']
     for r in records:
-        ctx.obj['logger'].info(f'Found new record: {r["title"]}', extra={'record': {'id': r['_id'], 'title': r['title']}})
+        download_db.insert(r)
     # 3. Write discovered records to download database
 
 @animaid.command()
