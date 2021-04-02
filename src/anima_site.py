@@ -1,5 +1,6 @@
 import requests
 from dateutil.parser import parse as parse_time
+import logging
 import re
 
 
@@ -12,6 +13,9 @@ class site:
 
 
 class bangumi_moe_site(site):
+    def __init__(self):
+        self.logger = logging.getLogger('animaid.bangumi_moe_site')
+
     def parse_team(self, url: str) -> dict:
         if url.startswith('https') and 'torrent' not in url:
             raise Exception(
@@ -42,7 +46,6 @@ class bangumi_moe_site(site):
             team_alias = input(f'Input the team alias:')
             team_alias = team_alias.strip()
 
-
         team = {
             "name": team_name,
             "alias": team_alias,
@@ -56,3 +59,13 @@ class bangumi_moe_site(site):
         }
         return team
 
+    def search_by_team(self, team, page, ignore_properties=['introduction']):
+        url = f'https://bangumi.moe/api/v2/torrent/team/{team["team_id"]}?p={page+1}&LIMIT=500'
+        res = requests.get(url=url).json()
+        res['torrents'] = sorted(res['torrents'], key=lambda x: parse_time(x['publish_time']), reverse=True)
+        for t in res['torrents']:
+            for i in ignore_properties:
+                del t[i]
+        if len(res) == 0:
+            raise Exception(f'No data responded, something is wrong with the request to bangumi.moe, url: {url}', extra={'team': team, 'url': url})
+        return res

@@ -76,17 +76,18 @@ def add_team(ctx, url):
 
 @animaid.command()
 @click.option('-t', '--anima_type', default='ongoing', required=True)
-@click.option('-p', '--page', default=2, required=True)
+@click.option('-p', '--max_pages', default=2, required=True)
 @click.option('-f', '--force', is_flag=True)
 @click.pass_context
-def update(ctx, anima_type, page, force):
+def update(ctx, anima_type, max_pages, force):
     if anima_type not in ['ongoing', 'bundle']:
         raise Exception(f"Unknown anima type: {anima_type}")
     # 1. Update teams' all recent records from bangumi.moe
     source_db = ctx.obj['data']['source']
     bangumi_moe_db = ctx.obj['data']['bangumi_moe']
     for team in source_db.all():
-        bangumi_moe_db.update(team=team, page=page, force=force)
+        bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
+        source_db.update(team)
     # 2. Parse user-defined record rules and find corresponding recent records
     # 3. Write discovered records to download database
 
