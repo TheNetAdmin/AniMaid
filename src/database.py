@@ -188,6 +188,10 @@ class bangumi_moe_database(base_database):
         team = self.flat_team_info(team)
         tid = team['team_id']
         if self.backend.type == 'json':
-            return [t for t in self.backend.data if t['team']['_id'] == tid]
+            res = []
+            for t in self.backend.data:
+                if 'team' in t.keys() and t['team']['_id'] == tid:
+                    res.append(t)
+            return res
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
