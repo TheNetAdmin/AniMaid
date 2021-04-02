@@ -7,6 +7,7 @@ from src.utils import working_directory, check_and_copy
 from src.anima_site import bangumi_moe_site
 from src.database import source_database, bangumi_moe_database
 from src.log import setup_log
+from src.follow import get_follow_records
 
 def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
@@ -15,7 +16,7 @@ def setup_config(args, config_path=None):
     if config_path is None:
         config_path = Path(args['config_file']).parent
     with working_directory(config_path):
-        for filename in ['config.json', 'secret.json', 'rename.json', 'record.json']:
+        for filename in ['config.json', 'secret.json', 'rename.json', 'follow.json']:
             check_and_copy(curr_path / 'docs' / 'example' / filename, Path('.') / filename)
     # 2. Creating database if not exists
     with open(args['config_file'], 'r') as f:
@@ -33,17 +34,17 @@ def setup_config(args, config_path=None):
 @click.option('-c', '--config', default='config/config.json', required=True, type=click.Path())
 @click.option('-s', '--secret', default='config/secret.json', required=True, type=click.Path())
 @click.option('-r', '--rename', default='config/rename.json', required=True, type=click.Path())
-@click.option('-e', '--record', default='config/record.json', required=True, type=click.Path())
+@click.option('-e', '--follow', default='config/follow.json', required=True, type=click.Path())
 @click.pass_context
-def animaid(ctx, config, secret, rename, record):
+def animaid(ctx, config, secret, rename, follow):
     ctx.ensure_object(dict)
     ctx.obj['config_file'] = Path(config)
     ctx.obj['secret_file'] = Path(secret)
     ctx.obj['rename_file'] = Path(rename)
-    ctx.obj['record_file'] = Path(record)
+    ctx.obj['follow_file'] = Path(follow)
     # Setup directory and read config files
     setup_config(ctx.obj)
-    for file_type in ['config', 'secret', 'rename', 'record']:
+    for file_type in ['config', 'secret', 'rename', 'follow']:
         with open(ctx.obj[f'{file_type}_file']) as f:
             ctx.obj[file_type] = json.load(f)
     # Setup log
@@ -88,7 +89,10 @@ def update(ctx, anima_type, max_pages, force):
     for team in source_db.all():
         bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
         source_db.update(team)
-    # 2. Parse user-defined record rules and find corresponding recent records
+    # 2. Parse user-defined follow rules and find corresponding recent records
+    records = get_follow_records(ctx.obj['follow'], bangumi_moe_db, source_db)
+    for r in records:
+        ctx.obj['logger'].info(f'Found new record: {r["title"]}', extra={'record': {'id': r['_id'], 'title': r['title']}})
     # 3. Write discovered records to download database
 
 @animaid.command()

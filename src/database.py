@@ -5,6 +5,9 @@ from datetime import datetime
 from src.anima_site import bangumi_moe_site
 from dateutil.parser import parse as parse_time
 from dateutil.relativedelta import relativedelta as relative_time
+from typing import Dict, List
+from time import sleep
+from pytz import UTC as utc
 
 
 class base_backend:
@@ -52,16 +55,35 @@ class base_database():
         self.backend = make_backend(config, secret)
 
 
-class source_database(base_database):
-    def __init__(self, config, secret):
-        super().__init__(config, secret)
+class download_database(base_database):
+    def search(self, record: dict) -> dict:
+        if self.backend.type == 'json':
+            for entry in self.backend.data:
+                if entry['record']['site'] == 'bangumi_moe' and entry['record']['_id'] == record['_id']:
+                    return entry
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
+        return None
 
+
+class source_database(base_database):
     def search(self, team) -> dict:
         if self.backend.type == 'json':
             for entry in self.backend.data:
                 for src in entry['source']:
                     if src['site'] == 'bangumi_moe' and src['team_id'] == team['source'][0]['team_id']:
                         return entry
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
+        return None
+
+    def search_by_name(self, team_name) -> dict:
+        if self.backend.type == 'json':
+            for entry in self.backend.data:
+                if entry['name'] == team_name or entry['alias'] == team_name:
+                    return entry
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
         return None
 
     def insert(self, team):
@@ -88,6 +110,7 @@ class source_database(base_database):
                             s['last_update'] = time
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
+
 
 class bangumi_moe_database(base_database):
     def __init__(self, config, secret):
@@ -138,7 +161,7 @@ class bangumi_moe_database(base_database):
 
         # Determine if we need to update database for this team
         need_update = True
-        if parse_time(team['last_update']) + relative_time(update_interval) > datetime.utcnow():
+        if parse_time(team['last_update']) + relative_time(hours=update_interval) > datetime.utcnow():
             log_info(
                 f'No need to update team [{team["alias"]:20}] from bangumi.moe, last update {team["last_update"]}')
             need_update = False
@@ -150,6 +173,7 @@ class bangumi_moe_database(base_database):
         if need_update:
             log_info(f'Updating [{team["alias"]:20}]')
             for p in range(max_pages):
+                sleep(1)
                 log_info(f'Page [{p}]', extra={'page': p})
                 records = self.site.search_by_team(team, p)['torrents']
                 for r in records:
@@ -157,4 +181,13 @@ class bangumi_moe_database(base_database):
                     if not succ:
                         log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
                                  'record_id': r['_id'], 'page': p})
+                        break
             # TODO: parse one more page to guarantee coverage
+
+    def search_by_team(self, team) -> List[Dict]:
+        team = self.flat_team_info(team)
+        tid = team['team_id']
+        if self.backend.type == 'json':
+            return [t for t in self.backend.data if t['team']['_id'] == tid]
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
