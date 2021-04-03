@@ -54,8 +54,10 @@ class record_date_filter(base_filter):
         return False
 
 def _make_filter(config):
-    if len(config.keys()) > 1:
-        raise Exception(f'Expect only 1 filter, but got {len(config.keys())}')
+    if 'type' not in config.keys():
+        raise Exception(f'Filter "type" not set for {config}')
+    if len(config.keys()) > 2:
+        raise Exception(f'Expect only 1 filter, but got {len(config.keys())} for {config}')
     if 'word' in config.keys():
         return record_word_filter(config)
     elif 'date' in config.keys():

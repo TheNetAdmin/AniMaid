@@ -221,12 +221,16 @@ class bangumi_moe_database(base_database):
                 sleep(1)
                 log_info(f'Page [{p}]')
                 records = self.site.search_by_team(team, p)['torrents']
+                stop = False
                 for r in records:
                     succ = self.insert(r)
                     if not succ:
                         log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
                                  'record': {'id': r['_id'], 'title': r['title']}})
+                        stop = True
                         break
+                if stop:
+                    break
             # TODO: parse one more page to guarantee coverage
 
     def search_by_team(self, team) -> List[Dict]:
