@@ -6,3 +6,6 @@ click>=7.1.2
 qbittorrent_api>=2020.10.10
 PlexAPI>=4.1.2
 python_dateutil>=2.8.1
+setuptools
+wheel
+log4mongo
