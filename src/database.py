@@ -68,8 +68,8 @@ class download_database(base_database):
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
         return None
-    
-    def insert(self, record: dict):
+
+    def insert(self, record: dict, apply=False):
         if self.search(record) is not None:
             return
         if self.backend.type == 'json':
@@ -81,13 +81,32 @@ class download_database(base_database):
                 'downloader': 'qbittorrent',
                 'track_type': record['track_type'],
                 'title': record['title'],
-                'magenet': record['magnet'],
-                'magenet_hash': record['infoHash'],
+                'magnet': record['magnet'],
+                'magnet_hash': record['infoHash'],
                 'publish_time': record['publish_time'],
+                'discover_time': datetime.utcnow().isoformat(),
                 'download_status': 'needDownload'
             }
-            self.backend.data.append(download_record)
-            self.logger.info(f'Found new record: {record["title"]}', extra={'record': {'id': record['_id'], 'title': record['title']}})
+            self.logger.info(f'Found new record: {record["title"]}', extra={
+                             'record': {'id': record['_id'], 'title': record['title']}})
+            if apply:
+                self.backend.data.append(download_record)
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
+
+    def update_states(self, download_client):
+        status = download_client.get_all_info()
+        if self.backend.type == 'json':
+            for i, entry in enumerate(self.backend.data):
+                magnet_hash = entry['magnet_hash']
+                if magnet_hash in status.keys():
+                    self.backend.data[i]['download_status'] = status[magnet_hash].state
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
+
+    def get_need_download(self):
+        if self.backend.type == 'json':
+            return [r for r in self.backend.data if r['download_status'] == 'needDownload']
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
@@ -182,7 +201,7 @@ class bangumi_moe_database(base_database):
             update_interval = team['update_interval']
         # Local logging function
 
-        def log_info(msg: str, extra={}, default_extra={"team": team, "max_pages": max_pages, "force": force, "update_interval": update_interval}):
+        def log_info(msg: str, extra={}, default_extra={'animaid_args': {"team": team, "max_pages": max_pages, "force": force, "update_interval": update_interval}}):
             self.logger.info(msg, extra={**default_extra, **extra})
 
         # Determine if we need to update database for this team
@@ -200,13 +219,13 @@ class bangumi_moe_database(base_database):
             log_info(f'Updating [{team["alias"]:20}]')
             for p in range(max_pages):
                 sleep(1)
-                log_info(f'Page [{p}]', extra={'page': p})
+                log_info(f'Page [{p}]')
                 records = self.site.search_by_team(team, p)['torrents']
                 for r in records:
                     succ = self.insert(r)
                     if not succ:
                         log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
-                                 'record': {'id': r['_id'], 'title': r['title']},  'page': p})
+                                 'record': {'id': r['_id'], 'title': r['title']}})
                         break
             # TODO: parse one more page to guarantee coverage
 

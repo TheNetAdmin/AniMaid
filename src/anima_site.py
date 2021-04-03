@@ -67,5 +67,5 @@ class bangumi_moe_site(site):
             for i in ignore_properties:
                 del t[i]
         if len(res) == 0:
-            raise Exception(f'No data responded, something is wrong with the request to bangumi.moe, url: {url}', extra={'team': team, 'url': url})
+            raise Exception(f'No data responded, something is wrong with the request to bangumi.moe, url: {url}', extra={'animaid_args':{'team': team, 'url': url}})
         return res

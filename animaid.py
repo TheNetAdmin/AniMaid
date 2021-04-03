@@ -2,12 +2,14 @@ import click
 import json
 import logging
 import traceback
+from collections import defaultdict
 from pathlib import Path
 from src.utils import working_directory, check_and_copy
 from src.anima_site import bangumi_moe_site
 from src.database import source_database, bangumi_moe_database, download_database
 from src.log import setup_log
 from src.follow import get_follow_records
+from src.downloader import make_downloader_client
 
 def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
@@ -80,8 +82,9 @@ def add_team(ctx, url):
 @click.option('-t', '--anima_type', default='ongoing', required=True)
 @click.option('-p', '--max_pages', default=2, required=True)
 @click.option('-f', '--force', is_flag=True)
+@click.option('-a', '--apply', is_flag=True)
 @click.pass_context
-def update(ctx, anima_type, max_pages, force):
+def update(ctx, anima_type, max_pages, force, apply):
     if anima_type not in ['ongoing', 'bundle']:
         raise Exception(f"Unknown anima type: {anima_type}")
     # 1. Update teams' all recent records from bangumi.moe
@@ -93,9 +96,30 @@ def update(ctx, anima_type, max_pages, force):
     # 2. Parse user-defined follow rules and find corresponding recent records
     records = get_follow_records(ctx.obj['follow'], bangumi_moe_db, source_db)
     download_db = ctx.obj['data']['download']
-    for r in records:
-        download_db.insert(r)
     # 3. Write discovered records to download database
+    for r in records:
+        download_db.insert(r, apply)
+    # 4. Update download states from downloader
+    downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
+    download_db.update_states(downloader)
+
+@animaid.command()
+@click.pass_context
+def download(ctx):
+    # 1. Update download states from downloader
+    downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
+    download_db = ctx.obj['data']['download']
+    download_db.update_states(downloader)
+    # 2. Get all need download magnets
+    all_need_download = download_db.get_need_download()
+    jobs = defaultdict(list)
+    for record in all_need_download:
+        magnet_hash = record['magnet_hash']
+        track_type = record['track_type']
+        jobs[track_type].append(magnet_hash)
+    for track_type, magnet_hashes in jobs.items():
+        sub_path = ctx.obj['config']['path']['sub_path'][track_type]
+        downloader.download(magnet_hashes, sub_path)
 
 @animaid.command()
 @click.pass_context
