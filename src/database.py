@@ -79,15 +79,15 @@ class download_database(base_database):
                     'site': 'bangumi_moe'
                 },
                 'downloader': 'qbittorrent',
-                'track_type': r['track_type'],
-                'title': r['title'],
-                'magenet': r['magnet'],
-                'magenet_hash': r['infoHash'],
-                'publish_time': r['publish_time'],
+                'track_type': record['track_type'],
+                'title': record['title'],
+                'magenet': record['magnet'],
+                'magenet_hash': record['infoHash'],
+                'publish_time': record['publish_time'],
                 'download_status': 'needDownload'
             }
             self.backend.data.append(download_record)
-            self.logger.info(f'Found new record: {r["title"]}', extra={'record': {'id': r['_id'], 'title': r['title']}})
+            self.logger.info(f'Found new record: {record["title"]}', extra={'record': {'id': record['_id'], 'title': record['title']}})
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
