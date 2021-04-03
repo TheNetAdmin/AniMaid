@@ -125,6 +125,7 @@ def download(ctx):
     for track_type, magnet_hashes in jobs.items():
         sub_path = ctx.obj['config']['path']['sub_path'][track_type]
         downloader.download(magnet_hashes, sub_path)
+    ctx.obj['logger'].info(f'Done parsing download jobs, found {len(all_need_download)} new hash records')
 
 @animaid.command()
 @click.pass_context
@@ -134,10 +135,9 @@ def organize(ctx):
 @animaid.command()
 @click.pass_context
 def test(ctx):
-    logger = logging.getLogger()
-    logger.info("Test from animaid top module")
-    logging.getLogger('animaid').info('Test animaid logger')
-    raise Exception("Test exception")
+    org = organizer(ctx.obj['rename'])
+    cfg = ctx.obj['config']
+    org.rename_recursive(Path(cfg['path']['source']) / cfg['path']['sub_path']['ongoing'] )
 
 if __name__ == '__main__':
     try:

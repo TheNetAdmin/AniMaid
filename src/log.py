@@ -4,7 +4,7 @@ from .utils import working_directory
 from pathlib import Path
 
 def make_log_handler(config, secret):
-    log_format = logging.Formatter('[%(asctime)s][%(filename)s:%(lineno)4s - %(funcName)20s() ] %(message)s')
+    log_format = logging.Formatter('[%(asctime)s][%(filename)20s:%(lineno)4s - %(funcName)20s() ] %(message)s')
     if config['backend'] == 'file':
         Path(config['path']).parent.mkdir(parents=True, exist_ok=True)
         handler = logging.FileHandler(filename=config['path'])

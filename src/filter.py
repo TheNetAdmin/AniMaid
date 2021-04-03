@@ -69,7 +69,7 @@ def _make_filter(config):
     else:
         raise Exception(f'Unknown filter: {config}')
 
-def make_filter(config, predefined_filters):
+def make_filter(config, predefined_filters=[]):
     if isinstance(config, str):
         return predefined_filters[config]
     elif isinstance(config, dict):

@@ -1,7 +1,8 @@
 {
     "filter": {
-        "media_file_extension": {
-            "include": {
+        "media_file_extension": [
+            {
+                "type": "include",
                 "extension": [
                     ".mkv",
                     ".mka",
@@ -9,9 +10,10 @@
                     ".mp4"
                 ]
             }
-        },
-        "ignore_special_dir": {
-            "exclude": {
+        ],
+        "ignore_special_dir": [
+            {
+                "type": "exclude",
                 "filename": [
                     "SPs",
                     "CDs",
@@ -20,7 +22,7 @@
                     "Scans"
                 ]
             }
-        }
+        ]
     },
     "file": {
         "rename": true,
@@ -252,25 +254,67 @@
             ]
         },
         {
-            "description": "Remove symbols",
-            "type": "remove",
+            "description": "Trans symbols to spaces",
+            "type": "transform",
             "file": "all",
             "regex": false,
             "entries": [
-                "[",
-                "]",
-                "_",
-                " - ",
-                "-",
-                "～",
-                "~",
-                ":",
-                ";",
-                "：",
-                "!",
-                "/",
-                "／",
-                "？"
+                {
+                    "source": "[",
+                    "target": " "
+                },
+                {
+                    "source": "]",
+                    "target": " "
+                },
+                {
+                    "source": "_",
+                    "target": " "
+                },
+                {
+                    "source": " - ",
+                    "target": " "
+                },
+                {
+                    "source": "-",
+                    "target": " "
+                },
+                {
+                    "source": "～",
+                    "target": " "
+                },
+                {
+                    "source": "~",
+                    "target": " "
+                },
+                {
+                    "source": ":",
+                    "target": " "
+                },
+                {
+                    "source": ";",
+                    "target": " "
+                },
+                {
+                    "source": "：",
+                    "target": " "
+                },
+                {
+                    "source": "!",
+                    "target": " "
+                },
+                {
+                    "source": "/",
+                    "target": " "
+                },
+                {
+                    "source": "／",
+                    "target": " "
+                },
+                {
+                    "source": "？",
+                    "target": " "
+                }
             ]
         },
         {

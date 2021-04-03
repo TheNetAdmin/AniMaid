@@ -33,6 +33,8 @@ def get_follow_records(follow, bangumi_moe_db, source_db):
 
         # Search records and apply filter
         team = source_db.search_by_name(track['team_name'])
+        if team is None:
+            raise Exception(f'This team is not found: {track["team_name"]}')
         track_records = bangumi_moe_db.search_by_team(team)
         for f in track_filters:
             track_records = f.apply(track_records)

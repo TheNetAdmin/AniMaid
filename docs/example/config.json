@@ -27,12 +27,14 @@
                 "path": "log/animaid.log"
             },
             {
-                "backend": "console"
+                "backend": "console",
+                "level": "debug"
             },
             {
                 "backend": "mongodb",
                 "database": "test",
-                "collection": "log"
+                "collection": "log",
+                "level": "debug"
             }
         ],
         "crash": [

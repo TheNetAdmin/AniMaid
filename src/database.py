@@ -91,6 +91,9 @@ class download_database(base_database):
                              'record': {'id': record['_id'], 'title': record['title']}})
             if apply:
                 self.backend.data.append(download_record)
+            else:
+                self.logger.warning(f'Record not inserted because "apply" is not set: {record["title"]}', extra={
+                    'record': {'id': record['_id'], 'title': record['title']}})
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
