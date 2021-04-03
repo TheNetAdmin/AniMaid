@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta as relative_time
 from typing import Dict, List
 from time import sleep
 from pytz import UTC as utc
+import pymongo as mongo
 
 
 class base_backend:
@@ -38,6 +39,12 @@ class json_backend(base_backend):
     def encoder(o):
         if isinstance(o, (datetime.date, datetime.datetime)):
             return o.isoformat()
+
+class mongodb_backend(base_backend):
+    def __init__(self, config, secret):
+        super().__init__(config, secret)
+        self.type = 'mongodb'
+        self.database = self.config['database']
 
 
 def make_backend(config, secret):
@@ -103,16 +110,27 @@ class download_database(base_database):
             for i, entry in enumerate(self.backend.data):
                 magnet_hash = entry['magnet_hash']
                 if magnet_hash in status.keys():
-                    self.backend.data[i]['download_status'] = status[magnet_hash].state
+                    s = status[magnet_hash].state
+                    self.backend.data[i]['download_status'] = s
+                    if s == 'error':
+                        self.logger.error(f'Download error for {entry["title"]}', extra={'record': entry['record']})
+                else:
+                    if entry['download_status'] != 'needDownload':
+                        entry['download_status'] = 'unknown'
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
     def get_need_download(self):
         if self.backend.type == 'json':
-            return [r for r in self.backend.data if r['download_status'] == 'needDownload']
+            return [r for r in self.backend.data if r['download_status'] in ['needDownload']]
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
+    def get_downloading(self):
+        if self.backend.type == 'json':
+            return [r for r in self.backend.data if r['download_status'] in ['downloading']]
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
 
 class source_database(base_database):
     def search(self, team) -> dict:
@@ -204,7 +222,7 @@ class bangumi_moe_database(base_database):
             update_interval = team['update_interval']
         # Local logging function
 
-        def log_info(msg: str, extra={}, default_extra={'animaid_args': {"team": team, "max_pages": max_pages, "force": force, "update_interval": update_interval}}):
+        def log_info(msg: str, extra={}, default_extra={'info': {"team": team, "max_pages": max_pages, "force": force, "update_interval": update_interval}}):
             self.logger.info(msg, extra={**default_extra, **extra})
 
         # Determine if we need to update database for this team

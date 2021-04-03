@@ -2,6 +2,7 @@ from .filter import make_filter
 from pathlib import Path
 import logging
 import re
+import copy
 from .utils import chdir
 
 class renamer:
@@ -51,10 +52,10 @@ class renamer:
             for e in self.entries:
                 if self.regex:
                     if len(re.findall(e, name)) > 0:
-                        raise Exception(f'Renaming not clean due to regex rule {e} for file {name}') 
+                        raise Exception(f'Renaming not clean, according to regex rule {e}, |{re.findall(e, name)[0]}| in |{name}|') 
                 else:
                     if e in name:
-                        raise Exception(f'Renaming not clean due to rule {e} for file {name}') 
+                        raise Exception(f'Renaming not clean, according to rule {e}, |{e}| in |{name}|') 
         return parent / name
 
 class organizer:
@@ -92,13 +93,14 @@ class organizer:
                     source_files[typ] = []
             
             # Apply rename rules
-            target_files = source_files.copy()
+            target_files = copy.deepcopy(source_files)
             for typ in ['dir', 'file']:
-                for i, t in enumerate(source_files[typ]):
+                for i, t in enumerate(target_files[typ]):
                     self.logger.debug(f'Renaming {typ} -- {t.name}')
                     for r in self.renamers:
                         t = r.apply(t)
-                        self.logger.debug(f'    --[{r.desc:30}]-->{t}')
+                        self.logger.debug(f'    --[{r.desc:30}]-->{t.name}')
+                    self.logger.debug(f'    --[{"Final result":30}]-->{t}')
                     target_files[typ][i] = t
             if apply:
                 # TODO

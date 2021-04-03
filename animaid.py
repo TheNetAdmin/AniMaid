@@ -12,6 +12,7 @@ from src.follow import get_follow_records
 from src.downloader import make_downloader_client
 from src.organizer import organizer
 
+
 def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
     # TODO: use curr_path relative to this python script
@@ -20,7 +21,8 @@ def setup_config(args, config_path=None):
         config_path = Path(args['config_file']).parent
     with working_directory(config_path):
         for filename in ['config.json', 'secret.json', 'rename.json', 'follow.json']:
-            check_and_copy(curr_path / 'docs' / 'example' / filename, Path('.') / filename)
+            check_and_copy(curr_path / 'docs' / 'example' /
+                           filename, Path('.') / filename)
     # 2. Creating database if not exists
     with open(args['config_file'], 'r') as f:
         config = json.load(f)
@@ -30,7 +32,6 @@ def setup_config(args, config_path=None):
         if data_config['backend'] == 'json' and not Path(data_config['path']).exists():
             with open(data_config['path'], 'w') as f:
                 f.write('[]')
-
 
 
 @click.group()
@@ -60,6 +61,7 @@ def animaid(ctx, config, secret, rename, follow):
         'bangumi_moe': bangumi_moe_database(ctx.obj['config']['data']['bangumi_moe'], secret)
     }
 
+
 @animaid.command()
 @click.pass_context
 def install(ctx, config_path):
@@ -78,6 +80,7 @@ def add_team(ctx, url):
     source_db.insert(team)
     team = source_db.search(team)
     ctx.obj['logger'].info(f'Team record in source database: {team}')
+
 
 @animaid.command()
 @click.option('-t', '--anima_type', default='ongoing', required=True)
@@ -107,6 +110,7 @@ def update(ctx, anima_type, max_pages, force, apply):
     downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
     download_db.update_states(downloader)
 
+
 @animaid.command()
 @click.pass_context
 def download(ctx):
@@ -125,24 +129,47 @@ def download(ctx):
     for track_type, magnet_hashes in jobs.items():
         sub_path = ctx.obj['config']['path']['sub_path'][track_type]
         downloader.download(magnet_hashes, sub_path)
-    ctx.obj['logger'].info(f'Done parsing download jobs, found {len(all_need_download)} new hash records')
+    ctx.obj['logger'].info(
+        f'Done parsing download jobs, found {len(all_need_download)} new hash records')
+    if len(all_need_download) > 0:
+        for r in all_need_download:
+            ctx.obj['logger'].info(f'Downloading {r["title"]}')
+
 
 @animaid.command()
 @click.pass_context
 def organize(ctx):
-    org = organizer(ctx.obj['rename'])
-
-@animaid.command()
-@click.pass_context
-def test(ctx):
+    # 1. Update download states and check for on-going download jobs
+    downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
+    download_db = ctx.obj['data']['download']
+    download_db.update_states(downloader)
+    all_downloading = download_db.get_downloading()
+    if len(all_downloading) > 0:
+        ctx.obj['logger'].info(f'There are {len(all_downloading)} jobs downloading, cannot organize until they finish', extra={
+                               'info': {'all_downloading': [j['title'] for j in all_downloading]}})
+        return
+    # 2. Recursively organizing sub pathes
     org = organizer(ctx.obj['rename'])
     cfg = ctx.obj['config']
-    org.rename_recursive(Path(cfg['path']['source']) / cfg['path']['sub_path']['ongoing'] )
+    for typ, sub_path in cfg['path']['sub_path'].items():
+        p = Path(cfg['path']['source']) / cfg['path']['sub_path'][typ]
+        ctx.obj['logger'].info(f'Organizing "{typ}" path: {p}')
+        org.rename_recursive(p)
+
+
+@ animaid.command()
+@ click.pass_context
+def test(ctx):
+    org=organizer(ctx.obj['rename'])
+    cfg=ctx.obj['config']
+    org.rename_recursive(
+        Path(cfg['path']['source']) / cfg['path']['sub_path']['ongoing'])
+
 
 if __name__ == '__main__':
     try:
         animaid()
     except Exception as e:
-        logger = logging.getLogger('animaid.crash')
+        logger=logging.getLogger('animaid.crash')
         logger.error(traceback.format_exc())
         logger.error(e)

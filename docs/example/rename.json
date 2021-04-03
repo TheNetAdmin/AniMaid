@@ -166,7 +166,7 @@
             "type": "remove",
             "file": "all",
             "regex": true,
-            "prefix": "\\s*\\[.*?",
+            "prefix": "\\s*\\[",
             "suffix": ".*?\\]\\s*",
             "entries": [
                 "(1080)[pP]",
@@ -249,8 +249,8 @@
             "file": "all",
             "regex": true,
             "entries": [
-                "\\[.*?[^0-9OvVAD].*?\\]",
-                "\\(.*?[^0-9OvVAD].*?\\)"
+                "\\[.*?[^0-9Ov\\.VAD].*?\\]",
+                "\\(.*?[^0-9Ov\\.VAD].*?\\)"
             ]
         },
         {

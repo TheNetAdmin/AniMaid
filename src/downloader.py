@@ -24,6 +24,8 @@ class qbittorrent(downloader):
 
     def download(self, urls: list, path):
         save_path = self.path + '/' + path
+        if ':\\' in self.path:
+            save_path = save_path.replace('/', '\\')
         self.logger.info(f'Download to path {save_path}:')
         for url in urls:
             self.logger.info(f'    {url}')
