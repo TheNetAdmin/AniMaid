@@ -1,51 +1,71 @@
 from dateutil.parser import parse as parse_time
 from typing import Dict, List
+from pathlib import Path
 
-class base_record_filter:
+class base_filter:
     def __init__(self, config):
         if config['type'] not in ['include', 'exclude']:
             raise Exception(f'Unknown filter type: {config["type"]}')
         self.config = config
 
-    def cond(self, record: dict) -> bool:
+    def cond(self, target) -> bool:
         raise Exception('Need to be implemented')
 
-    def apply(self, all_records: List[Dict]) -> List[Dict]:
+    def apply(self, all_targets: list) -> list:
         res = []
-        for record in all_records:
+        for target in all_targets:
             if self.config['type'] == 'include':
-                if self.cond(record):
-                    res.append(record)
+                if self.cond(target):
+                    res.append(target)
             elif self.config['type'] == 'exclude':
-                if not self.cond(record):
-                    res.append(record)
+                if not self.cond(target):
+                    res.append(target)
         return res
 
-class word_filter(base_record_filter):    
-    def cond(self, record: dict) -> bool:
+class file_extension_filter(base_filter):
+    def cond(self, target: Path) -> bool:
+        if target.suffix in self.config['extension']:
+            return True
+        return False
+
+class file_name_filter(base_filter):
+    def cond(self, target: Path) -> bool:
+        if target.name in self.config['filename']:
+            return True
+        return False
+
+
+class record_word_filter(base_filter):    
+    def cond(self, target: dict) -> bool:
         for word in self.config['word']:
-            if word in record['title']:
+            if word in target['title']:
                 return True
         return False
 
-class date_filter(base_record_filter):
-    def cond(self, record: dict) -> bool:
+class record_date_filter(base_filter):
+    def cond(self, target: dict) -> bool:
         start_time = parse_time(self.config['date'][0])
         end_time = parse_time(self.config['date'][1])
         if start_time > end_time:
             raise Exception(f'Date filter with wrong date order: {self.config}')
-        publish_time = parse_time(record['publish_time'])
+        publish_time = parse_time(target['publish_time'])
         if start_time <= publish_time < end_time:
             return True
         return False
 
 def _make_filter(config):
-    if 'word' in config.keys() and 'date' in config.keys():
-        raise Exception(f'Expect only one filter, but got two: {config}')
+    if len(config.keys()) > 1:
+        raise Exception(f'Expect only 1 filter, but got {len(config.keys())}')
     if 'word' in config.keys():
-        return word_filter(config)
+        return record_word_filter(config)
     elif 'date' in config.keys():
-        return date_filter(config)
+        return record_date_filter(config)
+    elif 'extension' in config.keys():
+        return file_extension_filter(config)
+    elif 'filename' in config.keys():
+        return file_name_filter(config)
+    else:
+        raise Exception(f'Unknown filter: {config}')
 
 def make_filter(config, predefined_filters):
     if isinstance(config, str):

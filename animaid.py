@@ -10,6 +10,7 @@ from src.database import source_database, bangumi_moe_database, download_databas
 from src.log import setup_log
 from src.follow import get_follow_records
 from src.downloader import make_downloader_client
+from src.organizer import organizer
 
 def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
@@ -88,18 +89,21 @@ def update(ctx, anima_type, max_pages, force, apply):
     if anima_type not in ['ongoing', 'bundle']:
         raise Exception(f"Unknown anima type: {anima_type}")
     # 1. Update teams' all recent records from bangumi.moe
+    ctx.obj['logger'].info('Update records from animation sites')
     source_db = ctx.obj['data']['source']
     bangumi_moe_db = ctx.obj['data']['bangumi_moe']
     for team in source_db.all():
         bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
         source_db.update(team)
     # 2. Parse user-defined follow rules and find corresponding recent records
+    ctx.obj['logger'].info('Parse follow rules and find  records')
     records = get_follow_records(ctx.obj['follow'], bangumi_moe_db, source_db)
     download_db = ctx.obj['data']['download']
     # 3. Write discovered records to download database
     for r in records:
         download_db.insert(r, apply)
     # 4. Update download states from downloader
+    ctx.obj['logger'].info('Update download states from downloader')
     downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
     download_db.update_states(downloader)
 
@@ -107,6 +111,7 @@ def update(ctx, anima_type, max_pages, force, apply):
 @click.pass_context
 def download(ctx):
     # 1. Update download states from downloader
+    ctx.obj['logger'].info('Parse download jobs')
     downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
     download_db = ctx.obj['data']['download']
     download_db.update_states(downloader)
@@ -120,6 +125,11 @@ def download(ctx):
     for track_type, magnet_hashes in jobs.items():
         sub_path = ctx.obj['config']['path']['sub_path'][track_type]
         downloader.download(magnet_hashes, sub_path)
+
+@animaid.command()
+@click.pass_context
+def organize(ctx):
+    org = organizer(ctx.obj['rename'])
 
 @animaid.command()
 @click.pass_context
