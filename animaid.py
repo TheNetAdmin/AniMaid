@@ -69,7 +69,7 @@ def install(ctx, config_path):
 
 
 @animaid.command()
-@click.option('-u', '--url', required=True)
+@click.option('-u', '--url', help='URL of a team\'s anima', required=True)
 @click.pass_context
 def add_team(ctx, url):
     site = bangumi_moe_site()

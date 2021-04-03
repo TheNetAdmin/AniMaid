@@ -1,0 +1,101 @@
+[
+    {
+        "name": "Lilith-Raws",
+        "alias": "Lilith-Raws",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5d8b24be306f1a0007bd7998",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "VCB-Studio",
+        "alias": "VCB-Studio",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5596b14ba0b788232ee352ca",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "诸神字幕组",
+        "alias": "Kamigami",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "559d1f1db85ffe4359622f5e",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "LoliHouse",
+        "alias": "LoliHouse",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "581b44bfee98e9ca20730e9a",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "幻樱字幕组",
+        "alias": "HYSUB",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "59af1b4ed04829c1623b0db9",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "星空字幕组",
+        "alias": "XKsub",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5d2214af306f1a0007b55b1b",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "极影字幕社",
+        "alias": "KTXP",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "567b9a702bdec8592924596e",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "喵萌奶茶屋",
+        "alias": "Nekomoe_kissaten",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "58a9c1c9f5dc363606ab42ec",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "桜都字幕组",
+        "alias": "Sakurato",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "57a034aa5cc0696f1ce1a1b1",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    }
+]

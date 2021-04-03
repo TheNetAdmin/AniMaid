@@ -1,5 +1,5 @@
 {
-    "database": {
+    "data": {
         "source": {
             "backend": "json",
             "path": "data/source.json"
@@ -21,13 +21,25 @@
     "slack": true,
     "plex": true,
     "logging": {
-        "default": {
-            "backend": "file",
-            "path": "log/animaid.log"
-        },
-        "crash": {
-            "backend": "file",
-            "path": "log/crash.log"
-        }
+        "default": [
+            {
+                "backend": "file",
+                "path": "log/animaid.log"
+            },
+            {
+                "backend": "console"
+            },
+            {
+                "backend": "mongodb",
+                "database": "test",
+                "collection": "log"
+            }
+        ],
+        "crash": [
+            {
+                "backend": "file",
+                "path": "log/crash.log"
+            }
+        ]
     }
 }
