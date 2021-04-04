@@ -22,7 +22,7 @@ class slack_client:
         })
         self.client.post(blocks=msg_block)
 
-    def notify_records(self, main_text, records=[]):
+    def _notify_records(self, main_text, records=[]):
         msg_block = [
             {
                 "type": "section",
@@ -50,7 +50,8 @@ class slack_client:
                 if 'bangumi' in tag and 'icon' in tag['bangumi']:
                     blk["accessory"] = {
                         "type": "image",
-                        "image_url": 'https://bangumi.moe/' + tag['bangumi']['icon']
+                        "image_url": 'https://bangumi.moe/' + tag['bangumi']['icon'],
+                        "alt_text": tag['bangumi']['name']
                     }
                     icon_found = True
             if not icon_found and 'team' in dr.keys() and dr['team']['icon'] is not None:
@@ -59,6 +60,7 @@ class slack_client:
                     "image_url": 'https://bangumi.moe/' + dr['team']['icon'],
                     "alt_text": dr['team']['name']
                 }
+                
             msg_block.append(blk)
 
         msg_block.append({
@@ -68,7 +70,7 @@ class slack_client:
         self.client.post(blocks=msg_block)
 
     def notify_new_records(self, records):
-        self.notify_records('@channel Master~ 刚发现了这些新番，并加入下载列表了哟~', records)
+        self._notify_records('@channel Master~ 刚发现了这些新番，并加入下载列表了哟~', records)
     
     def notify_organize(self):
         self.notify_single('@channel Master~ 已经帮您打扫完毕，所有文件已经整理并入库了哟~')

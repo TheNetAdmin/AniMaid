@@ -184,8 +184,8 @@ def organize(ctx, apply):
 @ animaid.command()
 @ click.pass_context
 def test(ctx):
-    all_downloading = ctx.obj['download'].get_downloading()
-    ctx.obj['slack'].notify_records(all_downloading)
+    all_downloading = ctx.obj['data']['download'].get_downloading()
+    ctx.obj['slack'].notify_new_records(all_downloading)
     
 
 
