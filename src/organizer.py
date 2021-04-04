@@ -2,6 +2,7 @@ from .filter import make_filter
 from pathlib import Path
 import logging
 import re
+from collections import Counter
 import copy
 from .utils import chdir
 
@@ -102,9 +103,24 @@ class organizer:
                         self.logger.debug(f'    --[{r.desc:30}]-->{t.name}')
                     self.logger.debug(f'    --[{"Final result":30}]-->{t}')
                     target_files[typ][i] = t
+                # 1. Check rename target numbers
+                ns = len(source_files[typ])
+                nt = len(target_files[typ])
+                if ns != nt:
+                    raise Exception(f'Number of records not matching, source has {ns} {typ}, but target has {nt} {typ}')
+                # 2. Check duplicate targets
+                cnt = Counter(target_files[typ])
+                for n, c in cnt.items():
+                    if c > 1:
+                        raise Exception(f'Target naming collision {c} times for: {n}')
+
             if apply:
-                # TODO
-                pass
+                for typ in ['dir', 'file']:
+                    for i in range(len(source_files[typ])):
+                        src = source_files[typ][i]
+                        tgt = target_files[typ][i]
+                        self.logger.info(f'Apply renaming: {src} \n{"":91}--> {tgt}', extra={'info':{'op': 'rename', 'src': str(src), 'tgt': str(tgt)}})
+                        src.rename(tgt)
 
             # 2. Rename sub dirs
             if apply:

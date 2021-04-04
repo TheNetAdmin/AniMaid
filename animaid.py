@@ -137,8 +137,9 @@ def download(ctx):
 
 
 @animaid.command()
+@click.option('-a', '--apply', is_flag=True)
 @click.pass_context
-def organize(ctx):
+def organize(ctx, apply):
     # 1. Update download states and check for on-going download jobs
     downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
     download_db = ctx.obj['data']['download']
@@ -154,7 +155,7 @@ def organize(ctx):
     for typ, sub_path in cfg['path']['sub_path'].items():
         p = Path(cfg['path']['source']) / cfg['path']['sub_path'][typ]
         ctx.obj['logger'].info(f'Organizing "{typ}" path: {p}')
-        org.rename_recursive(p)
+        org.rename_recursive(p, apply)
 
 
 @ animaid.command()
