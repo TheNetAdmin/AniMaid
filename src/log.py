@@ -37,12 +37,14 @@ def setup_log(config, secret):
         else:
             logger = logging.getLogger(f'animaid.{log_type}')
 
-        logger.setLevel(logging.INFO)
+        logger.setLevel(logging.DEBUG)
+
         for handler_config in config[log_type]:
             handler = make_log_handler(handler_config, secret)
             if 'level' in handler_config:
-                print(f'Setting {handler_config["level"]} level for handler {handler_config}')
-                handler.setLevel(level_map[handler_config['level']])
+                level = level_map[handler_config['level']]
             else:
-                handler.setLevel(logging.INFO)
+                level = logging.INFO
+            handler.setLevel(level)
+            print(f'Setting {level} level for logging handler {handler_config}, add to logger {logger.name}')
             logger.addHandler(handler)
