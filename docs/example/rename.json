@@ -60,6 +60,10 @@
                 {
                     "source": ".mkv",
                     "target": ""
+                },
+                {
+                    "source": ".mp4",
+                    "target": ""
                 }
             ]
         },
@@ -69,6 +73,10 @@
             "file": "all",
             "regex": false,
             "entries": [
+                {
+                    "source": "[SSSS.DYNAZENON]",
+                    "target": "SSSS.DYNAZENON"
+                },
                 {
                     "source": "[Yakusoku no Neverland S2]",
                     "target": "Yakusoku no Neverland S2"

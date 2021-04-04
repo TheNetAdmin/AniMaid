@@ -34,7 +34,7 @@
                 "backend": "mongodb",
                 "database": "test",
                 "collection": "log",
-                "level": "debug"
+                "level": "info"
             }
         ],
         "crash": [

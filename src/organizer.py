@@ -27,12 +27,11 @@ class renamer:
 
     def apply(self, target: Path, typ) -> (Path, bool):
         # Check file type
-        if self.file in ['dir', 'all'] and typ == 'file':
+        if self.file == 'dir' and typ == 'file':
             return target, False
-        
-        if self.file in ['file', 'all'] and typ == 'dir':
+        if self.file == 'file' and typ == 'dir':
             return target, False
-        
+
         # Apply rules
         parent = target.parent
         name = target.name
@@ -170,7 +169,7 @@ class organizer:
             for d in sub_dirs:
                 self.rename_recursive(d, apply)
 
-    def move_files(self, source: Path, target: Path, apply=False):
+    def move_files(self, source: Path, target: Path, apply=False) -> bool:
         '''Move every file/dir under source dir to target dir, non-recursively'''
         self.logger.info(f'Moving files from {source} to {target}')
         with chdir(source):
@@ -197,6 +196,7 @@ class organizer:
 
             self.check_rules(source_files, target_files)
 
+        any_file_moved = False
         if apply:
             for typ in ['dir', 'file']:
                 for i in range(len(source_files[typ])):
@@ -204,7 +204,9 @@ class organizer:
                         tgt = target_files[typ][i]
                         self.logger.info(f'Moving file: {src} \n{"":88}--> {tgt}', extra={
                                          'info': {'op': 'move', 'src': str(src), 'tgt': str(tgt)}})
+                        any_file_moved = True
                         with chmkdir(tgt.parent):
                             src.rename(tgt)
+        return any_file_moved
         
                     

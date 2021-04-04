@@ -94,6 +94,11 @@ class download_database(base_database):
                 'discover_time': datetime.utcnow().isoformat(),
                 'download_status': 'needDownload'
             }
+            if 'team' in record.keys():
+                download_record['team'] = {
+                    'name': record['team']['name'],
+                    'icon': record['team']['icon']
+                }
             self.logger.info(f'Found new record: {record["title"]}', extra={
                              'record': {'id': record['_id'], 'title': record['title']}})
             if apply:

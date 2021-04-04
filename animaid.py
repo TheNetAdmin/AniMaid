@@ -11,6 +11,8 @@ from src.log import setup_log
 from src.follow import get_follow_records
 from src.downloader import make_downloader_client
 from src.organizer import organizer
+from src.media_server import plex_server
+from src.slack import slack_client
 
 
 def setup_config(args, config_path=None):
@@ -54,6 +56,8 @@ def animaid(ctx, config, secret, rename, follow):
     # Setup log
     setup_log(ctx.obj['config']['logging'], ctx.obj['secret'])
     ctx.obj['logger'] = logging.getLogger('animaid')
+    # Setup slack
+    ctx.obj['slack'] = slack_client(ctx.obj['config'], ctx.obj['secret'])
     # Read databases
     ctx.obj['data'] = {
         'source': source_database(ctx.obj['config']['data']['source'], secret),
@@ -134,6 +138,7 @@ def download(ctx):
     if len(all_need_download) > 0:
         for r in all_need_download:
             ctx.obj['logger'].info(f'Downloading {r["title"]}')
+        ctx.obj['slack'].notify_new_records(all_need_download)
 
 
 @animaid.command()
@@ -152,6 +157,7 @@ def organize(ctx, apply):
     # 2. Recursively organizing sub pathes
     org = organizer(ctx.obj['rename'])
     cfg = ctx.obj['config']
+    any_file_moved = False
     for typ, sub_path in cfg['path']['sub_path'].items():
         p = Path(cfg['path']['source']) / cfg['path']['sub_path'][typ]
         ctx.obj['logger'].info(f'Organizing "{typ}" path: {p}')
@@ -160,16 +166,20 @@ def organize(ctx, apply):
         ctx.obj['logger'].info(f'Moving')
         src = p
         tgt = Path(cfg['path']['target']) / cfg['path']['sub_path'][typ]
-        org.move_files(src, tgt, apply)
+        moved = org.move_files(src, tgt, apply)
+        any_file_moved = any_file_moved or moved
+    # 3. Update PLEX
+    if any_file_moved:
+        plex = plex_server(ctx.obj['config'], ctx.obj['secret'])
+        plex.add_plex_ignore()
+        plex.update()
+        ctx.obj['slack'].notify_organize()
 
 
 @ animaid.command()
 @ click.pass_context
 def test(ctx):
-    org=organizer(ctx.obj['rename'])
-    cfg=ctx.obj['config']
-    org.rename_recursive(
-        Path(cfg['path']['source']) / cfg['path']['sub_path']['ongoing'])
+    ctx.obj['slack'].notify_single('test')
 
 
 if __name__ == '__main__':
