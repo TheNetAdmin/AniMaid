@@ -41,6 +41,9 @@ def get_follow_records(follow, bangumi_moe_db, source_db):
     
         # Parse each follow rule
         for rule in track['follow']:
+            # Check enabled
+            if 'enable' in rule.keys() and not rule['enable']:
+                continue
             # Match name
             if 'regex' not in rule.keys():
                 rule['regex'] = False

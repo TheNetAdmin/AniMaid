@@ -10,6 +10,7 @@ from time import sleep
 from pytz import UTC as utc
 import pymongo as mongo
 from filelock import FileLock
+import copy
 
 
 class base_backend:
@@ -30,15 +31,28 @@ class json_backend(base_backend):
         self.file = self.config['path']
         self.lock = FileLock(self.file + '.lock', timeout=50)
         self.lock.acquire()
+        self.modified = False
+        self.logger = logging.getLogger('animaid.database.json_backend')
         with open(self.file, 'r') as f:
             self.data = json.load(f)
 
     def __del__(self):
-        if self.data is not None:
+        if self.modified:
+            self.logger.info(f'Database {self.file} is modified, saving')
             with open(self.file, 'w') as f:
                 json.dump(self.data, f, indent=4,
                           default=self.encoder, ensure_ascii=False)
+        else:
+            self.logger.info(f'Database {self.file} not modified, no need to save')
         self.lock.release()
+    
+    def insert(self, object):
+        self.modified = True
+        self.data.insert(object)
+
+    def update(self, index, new_object):
+        self.modified = True
+        self.data[index] = new_object
 
     def encoder(o):
         if isinstance(o, (datetime.date, datetime.datetime)):
@@ -107,7 +121,7 @@ class download_database(base_database):
             self.logger.info(f'Found new record: {record["title"]}', extra={
                              'record': {'id': record['_id'], 'title': record['title']}})
             if apply:
-                self.backend.data.append(download_record)
+                self.backend.insert(download_record)
             else:
                 self.logger.warning(f'Record not inserted because "apply" is not set: {record["title"]}', extra={
                     'record': {'id': record['_id'], 'title': record['title']}})
@@ -121,7 +135,11 @@ class download_database(base_database):
                 magnet_hash = entry['magnet_hash']
                 if magnet_hash in status.keys():
                     s = status[magnet_hash].state
-                    self.backend.data[i]['download_status'] = s
+                    if s == entry['download_status']:
+                        continue
+                    new_object = copy.deepcopy(entry)
+                    new_object['download_status'] = s
+                    self.backend.update(i, new_object)
                     if s == 'error':
                         self.logger.error(f'Download error for {entry["title"]}', extra={
                                           'record': entry['record']})
@@ -168,7 +186,7 @@ class source_database(base_database):
         if self.search(team) is not None:
             pass
         if self.backend.type == 'json':
-            self.backend.data.append(team)
+            self.backend.insert(team)
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
@@ -218,11 +236,25 @@ class bangumi_moe_database(base_database):
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 
+
+    def search_anima(self, anima_name, team_alias = None) -> list:
+        if self.backend.type == 'json':
+            team_alias = team_alias.lower()
+            anima_name = anima_name.lower()
+            if team_alias is None:
+                return [d['title'] for d in self.backend.data if anima_name in d['title'].lower()]
+            else:
+                return [d['title'] for d in self.backend.data if anima_name in d['title'].lower() and team_alias in d['content'][0][0].lower()]
+        else:
+            raise Exception(f'Backend not supported: {self.backend.type}')
+
+
+
     def insert(self, torrent) -> bool:
         if self.search(torrent) is not None:
             return False
         if self.backend.type == 'json':
-            self.backend.data.append(torrent)
+            self.backend.insert(torrent)
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
         return True
@@ -250,20 +282,31 @@ class bangumi_moe_database(base_database):
         # Update
         if need_update:
             log_info(f'Updating [{team["alias"]:20}]')
+            cnt_new_records = 0
             for p in range(max_pages):
                 sleep(1)
-                log_info(f'Page [{p}]')
+                log_info(f'`Team` page [{p}]')
                 records = self.site.search_by_team(team, p)['torrents']
+                if 'team_tag_id' in team:
+                    log_info(f'`Search` page [{p}]')
+                    records += self.site.searcy_by_tag(team['team_tag_id'], p)['torrents']
                 stop = False
+
                 for r in records:
                     succ = self.insert(r)
-                    if not succ:
-                        log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
-                                 'record': {'id': r['_id'], 'title': r['title']}})
-                        stop = True
-                        break
+                    if succ:
+                        cnt_new_records += 1
+                    else:
+                        if not force:
+                            log_info(f'Found duplicated record (id: {r["_id"]}) on page {p}, stop here', extra={
+                                    'record': {'id': r['_id'], 'title': r['title']}})
+                            stop = True
+                            break
+                        else:
+                            stop = False
                 if stop:
                     break
+            log_info(f'Inserted {cnt_new_records} new records to bangumi_moe database')
             # TODO: parse one more page to guarantee coverage
 
     def search_by_team(self, team) -> List[Dict]:

@@ -59,9 +59,8 @@ class bangumi_moe_site(site):
             ]
         }
         return team
-
-    def search_by_team(self, team, page, ignore_properties=['introduction']):
-        url = f'https://bangumi.moe/api/v2/torrent/team/{team["team_id"]}?p={page+1}&LIMIT=500'
+    
+    def _search(self, url,  ignore_properties=['introduction']):
         res = requests.get(url=url).json()
         res['torrents'] = sorted(res['torrents'], key=lambda x: parse_time(x['publish_time']), reverse=True)
         for t in res['torrents']:
@@ -70,6 +69,14 @@ class bangumi_moe_site(site):
         if len(res) == 0:
             raise Exception(f'No data responded, something is wrong with the request to bangumi.moe, url: {url}', extra={'info':{'team': team, 'url': url}})
         return res
+
+    def search_by_team(self, team, page, ignore_properties=['introduction']):
+        url = f'https://bangumi.moe/api/v2/torrent/team/{team["team_id"]}?p={page+1}&LIMIT=500'
+        return self._search(url, ignore_properties)
+    
+    def searcy_by_tag(self, tag, page, ignore_properties=['introduction']):
+        url = f'https://bangumi.moe/api/v2/torrent/search?query=`{tag}`?p={page+1}&LIMIT=500'
+        return self._search(url, ignore_properties)
 
     def search_by_torrent(self, torrent_id):
         url = f'https://bangumi.moe/api/v2/torrent/{torrent_id}'

@@ -13,6 +13,7 @@ from src.downloader import make_downloader_client
 from src.organizer import organizer
 from src.media_server import plex_server
 from src.slack import slack_client
+from filelock import FileLock
 
 global_slack = None
 
@@ -54,9 +55,11 @@ def animaid(ctx, config, secret, rename, follow):
     for file_type in ['config', 'secret', 'rename', 'follow']:
         with open(ctx.obj[f'{file_type}_file']) as f:
             ctx.obj[file_type] = json.load(f)
+
     # Setup log
     setup_log(ctx.obj['config']['logging'], ctx.obj['secret'])
     ctx.obj['logger'] = logging.getLogger('animaid')
+
     # Setup slack
     if ctx.obj['config']['slack']:
         ctx.obj['slack'] = slack_client(ctx.obj['config'], ctx.obj['secret'])
@@ -91,19 +94,21 @@ def add_team(ctx, url):
 
 
 @animaid.command()
-@click.option('-t', '--anima_type', default='ongoing', required=True)
-@click.option('-p', '--max_pages', default=2, required=True)
 @click.option('-f', '--force', is_flag=True)
-@click.option('-a', '--apply', is_flag=True)
+@click.option('-a', '--apply_download', is_flag=True)
+@click.option('-t', '--team_alias')
+@click.option('-p', '--max_pages', default=2, required=True)
 @click.pass_context
-def update(ctx, anima_type, max_pages, force, apply):
-    if anima_type not in ['ongoing', 'bundle']:
-        raise Exception(f"Unknown anima type: {anima_type}")
+def update(ctx, max_pages, force, apply_download, team_alias):
     # 1. Update teams' all recent records from bangumi.moe
     ctx.obj['logger'].info('Update records from animation sites')
     source_db = ctx.obj['data']['source']
     bangumi_moe_db = ctx.obj['data']['bangumi_moe']
-    for team in source_db.all():
+    if team_alias:
+        teams_to_update = [source_db.search_by_name(team_alias)]
+    else:
+        teams_to_update = source_db.all()
+    for team in teams_to_update:
         bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
         source_db.update(team)
     # 2. Parse user-defined follow rules and find corresponding recent records
@@ -112,7 +117,7 @@ def update(ctx, anima_type, max_pages, force, apply):
     download_db = ctx.obj['data']['download']
     # 3. Write discovered records to download database
     for r in records:
-        download_db.insert(r, apply)
+        download_db.insert(r, apply_download)
     # 4. Update download states from downloader
     ctx.obj['logger'].info('Update download states from downloader')
     downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
@@ -180,6 +185,17 @@ def organize(ctx, apply):
         plex.update()
         ctx.obj['slack'].notify_organize()
 
+@animaid.command()
+@click.option('-t', '--team_alias')
+@click.option('-n', '--anima_name')
+@click.pass_context
+def search_anima(ctx, team_alias, anima_name):
+    bgm_db = ctx.obj['data']['bangumi_moe']
+    result = bgm_db.search_anima(anima_name, team_alias)
+    ctx.obj['logger'].info(f'Found {len(result)} records:')
+    for i, r in enumerate(result):
+        ctx.obj['logger'].info(f'    {i:2s}: {r}')
+
 
 @ animaid.command()
 @ click.pass_context
@@ -190,12 +206,17 @@ def test(ctx):
 
 
 if __name__ == '__main__':
-    try:
-        animaid()
-    except Exception as e:
-        logger=logging.getLogger('animaid.crash')
-        logger.error(traceback.format_exc())
-        logger.error(e)
-        if global_slack is not None:
-            global_slack.notify_exception(e)
-        exit(1)
+    exit_code = 0
+    # Lock animaid
+    lock = FileLock('data/animaid.lock', timeout=10)
+    with lock:
+        try:
+            animaid()
+        except Exception as e:
+            logger=logging.getLogger('animaid.crash')
+            logger.error(traceback.format_exc())
+            logger.error(e)
+            if global_slack is not None:
+                global_slack.notify_exception(e)
+            exit_code = 1
+    exit(exit_code)
