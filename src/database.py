@@ -30,21 +30,21 @@ class json_backend(base_backend):
         self.type = 'json'
         self.file = self.config['path']
         self.lock = FileLock(self.file + '.lock', timeout=50)
-        self.lock.acquire()
         self.modified = False
         self.logger = logging.getLogger('animaid.database.json_backend')
-        with open(self.file, 'r') as f:
-            self.data = json.load(f)
+        with self.lock:
+            with open(self.file, 'r') as f:
+                self.data = json.load(f)
 
     def __del__(self):
         if self.modified:
             self.logger.info(f'Database {self.file} is modified, saving')
-            with open(self.file, 'w') as f:
-                json.dump(self.data, f, indent=4,
-                          default=self.encoder, ensure_ascii=False)
+            with self.lock:
+                with open(self.file, 'w') as f:
+                    json.dump(self.data, f, indent=4,
+                            default=self.encoder, ensure_ascii=False)
         else:
             self.logger.info(f'Database {self.file} not modified, no need to save')
-        self.lock.release()
     
     def insert(self, object):
         self.modified = True
@@ -239,11 +239,11 @@ class bangumi_moe_database(base_database):
 
     def search_anima(self, anima_name, team_alias = None) -> list:
         if self.backend.type == 'json':
-            team_alias = team_alias.lower()
             anima_name = anima_name.lower()
             if team_alias is None:
                 return [d['title'] for d in self.backend.data if anima_name in d['title'].lower()]
             else:
+                team_alias = team_alias.lower()
                 return [d['title'] for d in self.backend.data if anima_name in d['title'].lower() and team_alias in d['content'][0][0].lower()]
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')

@@ -194,15 +194,17 @@ def search_anima(ctx, team_alias, anima_name):
     result = bgm_db.search_anima(anima_name, team_alias)
     ctx.obj['logger'].info(f'Found {len(result)} records:')
     for i, r in enumerate(result):
-        ctx.obj['logger'].info(f'    {i:2s}: {r}')
+        ctx.obj['logger'].info(f'    {i:02}: {r}')
+    ctx.obj['logger'].info(f'Search anima operation finished')
 
 
 @ animaid.command()
 @ click.pass_context
 def test(ctx):
-    all_downloading = ctx.obj['data']['download'].get_downloading()
-    ctx.obj['slack'].notify_new_records(all_downloading)
-    
+    # 1. Update download states and check for on-going download jobs
+    downloader = make_downloader_client(ctx.obj['config'], ctx.obj['secret'])
+    download_db = ctx.obj['data']['download']
+    # download_db.update_states(downloader)
 
 
 if __name__ == '__main__':
@@ -219,4 +221,4 @@ if __name__ == '__main__':
             if global_slack is not None:
                 global_slack.notify_exception(e)
             exit_code = 1
-    exit(exit_code)
+    exit(code)

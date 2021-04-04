@@ -3,8 +3,10 @@ from log4mongo.handlers import MongoHandler
 from .utils import chmkdir
 from pathlib import Path
 
+
 def make_log_handler(config, secret):
-    log_format = logging.Formatter('[%(asctime)s][%(filename)20s:%(lineno)4s - %(funcName)20s() ] %(message)s')
+    log_format = logging.Formatter(
+        '[%(asctime)s][%(filename)20s:%(lineno)4s - %(funcName)20s() ] %(message)s')
     if config['backend'] == 'file':
         Path(config['path']).parent.mkdir(parents=True, exist_ok=True)
         handler = logging.FileHandler(filename=config['path'])
@@ -14,7 +16,8 @@ def make_log_handler(config, secret):
         handler.setFormatter(log_format)
     elif config['backend'] == 'mongodb':
         ms = secret['mongodb']
-        handler = MongoHandler(host=ms['addr'], port=ms['port'], username=ms['username'], password=ms['password'],database_name=config['database'], collection=config['collection'])
+        handler = MongoHandler(host=ms['addr'], port=ms['port'], username=ms['username'],
+                               password=ms['password'], database_name=config['database'], collection=config['collection'])
     return handler
 
 
@@ -41,4 +44,3 @@ def setup_log(config, secret):
             else:
                 level = logging.INFO
             logger.setLevel(level)
-    
