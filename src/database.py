@@ -9,6 +9,7 @@ from typing import Dict, List
 from time import sleep
 from pytz import UTC as utc
 import pymongo as mongo
+from filelock import FileLock
 
 
 class base_backend:
@@ -27,6 +28,8 @@ class json_backend(base_backend):
         super().__init__(config, secret)
         self.type = 'json'
         self.file = self.config['path']
+        self.lock = FileLock(self.file + '.lock', timeout=50)
+        self.lock.acquire()
         with open(self.file, 'r') as f:
             self.data = json.load(f)
 
@@ -35,10 +38,12 @@ class json_backend(base_backend):
             with open(self.file, 'w') as f:
                 json.dump(self.data, f, indent=4,
                           default=self.encoder, ensure_ascii=False)
+        self.lock.release()
 
     def encoder(o):
         if isinstance(o, (datetime.date, datetime.datetime)):
             return o.isoformat()
+
 
 class mongodb_backend(base_backend):
     def __init__(self, config, secret):
@@ -79,12 +84,9 @@ class download_database(base_database):
     def insert(self, record: dict, apply=False):
         if self.search(record) is not None:
             return
+        site = bangumi_moe_site()
         if self.backend.type == 'json':
             download_record = {
-                'record': {
-                    '_id': record['_id'],
-                    'site': 'bangumi_moe'
-                },
                 'downloader': 'qbittorrent',
                 'track_type': record['track_type'],
                 'title': record['title'],
@@ -94,16 +96,14 @@ class download_database(base_database):
                 'discover_time': datetime.utcnow().isoformat(),
                 'download_status': 'needDownload'
             }
-            if 'team' in record.keys():
-                download_record['record']['team'] = {
-                    'name': record['team']['name'],
-                    'icon': record['team']['icon']
+            detailed_record = site.search_by_torrent(record['_id'])
+            if detailed_record is not None:
+                download_record['record'] = detailed_record
+            else:
+                download_record['record'] = {
+                    '_id': record['_id']
                 }
-            # Find bangumi icon
-            for tag in record['tags']:
-                if 'bangumi' in tag and 'icon' in tag['bangumi']:
-                    download_record['record']['icon'] = tag['bangumi']['icon']
-                    break
+            download_record['record']['site'] = 'bangumi_moe'
             self.logger.info(f'Found new record: {record["title"]}', extra={
                              'record': {'id': record['_id'], 'title': record['title']}})
             if apply:
@@ -123,7 +123,8 @@ class download_database(base_database):
                     s = status[magnet_hash].state
                     self.backend.data[i]['download_status'] = s
                     if s == 'error':
-                        self.logger.error(f'Download error for {entry["title"]}', extra={'record': entry['record']})
+                        self.logger.error(f'Download error for {entry["title"]}', extra={
+                                          'record': entry['record']})
                 else:
                     if entry['download_status'] != 'needDownload':
                         entry['download_status'] = 'unknown'
@@ -138,9 +139,10 @@ class download_database(base_database):
 
     def get_downloading(self):
         if self.backend.type == 'json':
-            return [r for r in self.backend.data if r['download_status'] in ['downloading']]
+            return [r for r in self.backend.data if r['download_status'] in ['downloading', 'metaDL']]
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
+
 
 class source_database(base_database):
     def search(self, team) -> dict:

@@ -29,6 +29,12 @@
             {
                 "backend": "console",
                 "level": "debug"
+            },
+            {
+                "backend": "mongodb",
+                "database": "test",
+                "collection": "log",
+                "level": "info"
             }
         ],
         "crash": [

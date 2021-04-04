@@ -14,6 +14,15 @@
                 ]
             }
         ],
+        "1080p": [
+            {
+                "type": "include",
+                "word": [
+                    "1080p",
+                    "1080P"
+                ]
+            }
+        ],
         "2021Winter": [
             {
                 "type": "include",
@@ -22,9 +31,39 @@
                     "2021-04-15T00:00:00.000Z"
                 ]
             }
+        ],
+        "2021Spring": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-04-01T00:00:00.000Z",
+                    "2021-07-15T00:00:00.000Z"
+                ]
+            }
         ]
     },
     "track": [
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring"
+            ],
+            "follow": [
+                {
+                    "name": "真白之音"
+                },
+                {
+                    "name": "NOMAD MEGALOBOX 機甲拳擊 / Nomad - Megalo Box S02",
+                    "filter": [
+                        "1080p"
+                    ]
+                },
+                {
+                    "name": "Vivy - Fluorite Eye's Song"
+                }
+            ]
+        },
         {
             "team_name": "Sakurato",
             "type": "ongoing",

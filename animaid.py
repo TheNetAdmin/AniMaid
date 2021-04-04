@@ -14,6 +14,7 @@ from src.organizer import organizer
 from src.media_server import plex_server
 from src.slack import slack_client
 
+global_slack = None
 
 def setup_config(args, config_path=None):
     # 1. Creating example config files if not exists
@@ -57,7 +58,10 @@ def animaid(ctx, config, secret, rename, follow):
     setup_log(ctx.obj['config']['logging'], ctx.obj['secret'])
     ctx.obj['logger'] = logging.getLogger('animaid')
     # Setup slack
-    ctx.obj['slack'] = slack_client(ctx.obj['config'], ctx.obj['secret'])
+    if ctx.obj['config']['slack']:
+        ctx.obj['slack'] = slack_client(ctx.obj['config'], ctx.obj['secret'])
+        global global_slack
+        global_slack = slack_client(ctx.obj['config'], ctx.obj['secret'])
     # Read databases
     ctx.obj['data'] = {
         'source': source_database(ctx.obj['config']['data']['source'], secret),
@@ -138,7 +142,8 @@ def download(ctx):
     if len(all_need_download) > 0:
         for r in all_need_download:
             ctx.obj['logger'].info(f'Downloading {r["title"]}')
-        ctx.obj['slack'].notify_new_records(all_need_download)
+        if ctx.obj['config']['slack']:
+            ctx.obj['slack'].notify_new_records(all_need_download)
 
 
 @animaid.command()
@@ -169,7 +174,7 @@ def organize(ctx, apply):
         moved = org.move_files(src, tgt, apply)
         any_file_moved = any_file_moved or moved
     # 3. Update PLEX
-    if any_file_moved:
+    if any_file_moved and ctx.obj['config']['plex']:
         plex = plex_server(ctx.obj['config'], ctx.obj['secret'])
         plex.add_plex_ignore()
         plex.update()
@@ -179,7 +184,9 @@ def organize(ctx, apply):
 @ animaid.command()
 @ click.pass_context
 def test(ctx):
-    ctx.obj['slack'].notify_single('test')
+    all_downloading = ctx.obj['download'].get_downloading()
+    ctx.obj['slack'].notify_records(all_downloading)
+    
 
 
 if __name__ == '__main__':
@@ -189,3 +196,6 @@ if __name__ == '__main__':
         logger=logging.getLogger('animaid.crash')
         logger.error(traceback.format_exc())
         logger.error(e)
+        if global_slack is not None:
+            global_slack.notify_exception(e)
+        exit(1)

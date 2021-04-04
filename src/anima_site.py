@@ -70,3 +70,10 @@ class bangumi_moe_site(site):
         if len(res) == 0:
             raise Exception(f'No data responded, something is wrong with the request to bangumi.moe, url: {url}', extra={'info':{'team': team, 'url': url}})
         return res
+
+    def search_by_torrent(self, torrent_id):
+        url = f'https://bangumi.moe/api/v2/torrent/{torrent_id}'
+        res = requests.get(url=url).json()
+        if len(res) == 0:
+            return None
+        return res

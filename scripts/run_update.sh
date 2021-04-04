@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 set -x
 curr_path=$(realpath $(dirname $0))
 cd "$curr_path/.."
