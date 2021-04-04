@@ -74,6 +74,10 @@
             "regex": false,
             "entries": [
                 {
+                    "source": "[LOG_HORIZON_Entaku_Houkai]",
+                    "target": "Log Horizon S3"
+                },
+                {
                     "source": "[SSSS.DYNAZENON]",
                     "target": "SSSS.DYNAZENON"
                 },

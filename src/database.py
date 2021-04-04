@@ -48,7 +48,7 @@ class json_backend(base_backend):
     
     def insert(self, object):
         self.modified = True
-        self.data.insert(object)
+        self.data.append(object)
 
     def update(self, index, new_object):
         self.modified = True
@@ -287,11 +287,11 @@ class bangumi_moe_database(base_database):
             log_info(f'Updating [{team["alias"]:20}]')
             cnt_new_records = 0
             for p in range(max_pages):
-                sleep(1)
-                log_info(f'`Team` page [{p}]')
+                sleep(2)
+                log_info(f'Page `Team` [{p}]')
                 records = self.site.search_by_team(team, p)['torrents']
                 if 'team_tag_id' in team:
-                    log_info(f'`Search` page [{p}]')
+                    log_info(f'Page `Search` [{p}]')
                     records += self.site.searcy_by_tag(team['team_tag_id'], p)['torrents']
                 stop = False
 
@@ -320,6 +320,11 @@ class bangumi_moe_database(base_database):
             for t in self.backend.data:
                 if 'team' in t.keys() and t['team']['_id'] == tid:
                     res.append(t)
+                if 'team_tag_id' in team:
+                    if 'tag_ids' in t.keys():
+                        for tag_id in t['tag_ids']:
+                            if tag_id == team['team_tag_id']:
+                                res.append(t)
             return res
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')

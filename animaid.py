@@ -51,11 +51,13 @@ def close_databases(ctx):
 
 @contextlib.contextmanager
 def use_databases(ctx):
-    open_databases(ctx)
-    try:
-        yield
-    finally:
-        close_databases(ctx)
+    lock = FileLock('data/animaid.lock', timeout=10)
+    with lock:
+        open_databases(ctx)
+        try:
+            yield
+        finally:
+            close_databases(ctx)
 
 @click.group()
 @click.option('-c', '--config', default='config/config.json', required=True, type=click.Path())
@@ -227,16 +229,13 @@ def test(ctx):
 
 if __name__ == '__main__':
     exit_code = 0
-    # Lock animaid
-    lock = FileLock('data/animaid.lock', timeout=10)
-    with lock:
-        try:
-            animaid()
-        except Exception as e:
-            logger=logging.getLogger('animaid.crash')
-            logger.error(traceback.format_exc())
-            logger.error(e)
-            if global_slack is not None:
-                global_slack.notify_exception(e)
-            exit_code = 1
+    try:
+        animaid()
+    except Exception as e:
+        logger=logging.getLogger('animaid.crash')
+        logger.error(traceback.format_exc())
+        logger.error(e)
+        if global_slack is not None:
+            global_slack.notify_exception(e)
+        exit_code = 1
     exit(exit_code)

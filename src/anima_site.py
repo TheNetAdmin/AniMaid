@@ -62,7 +62,11 @@ class bangumi_moe_site(site):
     
     def _search(self, url,  ignore_properties=['introduction']):
         res = requests.get(url=url).json()
-        res['torrents'] = sorted(res['torrents'], key=lambda x: parse_time(x['publish_time']), reverse=True)
+        try:
+            res['torrents'] = sorted(res['torrents'], key=lambda x: parse_time(x['publish_time']), reverse=True)
+        except KeyError as e:
+            self.logger.debug(f'Invalid response {res}')
+            raise e
         for t in res['torrents']:
             for i in ignore_properties:
                 del t[i]
@@ -75,7 +79,7 @@ class bangumi_moe_site(site):
         return self._search(url, ignore_properties)
     
     def searcy_by_tag(self, tag, page, ignore_properties=['introduction']):
-        url = f'https://bangumi.moe/api/v2/torrent/search?query=`{tag}`?p={page+1}&LIMIT=500'
+        url = f'https://bangumi.moe/api/v2/torrent/search?query=`{tag}`&p={page+1}&LIMIT=500'
         return self._search(url, ignore_properties)
 
     def search_by_torrent(self, torrent_id):
