@@ -27,7 +27,7 @@ class plex_server(media_server):
         end_recursive = False
         for f in path.iterdir():
             if f.name == '.plexignore':
-                end_recursive = True
+                return
             if f.name in self.plex_ignore:
                 ignore_found.add(f)
             if f.is_dir():
