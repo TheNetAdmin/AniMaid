@@ -36,7 +36,21 @@
             "ignore_special_dir"
         ]
     },
-    "rule": [
+    "move_rule": [
+        {
+            "description": "Derive series name from media file name",
+            "type": "add_parent",
+            "file": "file",
+            "regex": true,
+            "entries": [
+                {
+                    "source": "\\s*[v\\d]+\\.[a-zA-Z\\d\\.]+$",
+                    "target": ""
+                }
+            ]
+        }
+    ],
+    "rename_rule": [
         {
             "description": "Fix dir names",
             "type": "transform",

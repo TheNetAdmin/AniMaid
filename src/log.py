@@ -1,6 +1,6 @@
 import logging
 from log4mongo.handlers import MongoHandler
-from .utils import working_directory
+from .utils import chmkdir
 from pathlib import Path
 
 def make_log_handler(config, secret):

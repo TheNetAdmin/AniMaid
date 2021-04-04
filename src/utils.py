@@ -4,7 +4,7 @@ import os
 import shutil
 
 @contextlib.contextmanager
-def working_directory(path):
+def chmkdir(path):
     """Go to working directory and return to previous on exit."""
     prev_cwd = Path.cwd()
     Path(path).mkdir(parents=True, exist_ok=True)

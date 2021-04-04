@@ -4,7 +4,7 @@ import logging
 import traceback
 from collections import defaultdict
 from pathlib import Path
-from src.utils import working_directory, check_and_copy
+from src.utils import chmkdir, check_and_copy
 from src.anima_site import bangumi_moe_site
 from src.database import source_database, bangumi_moe_database, download_database
 from src.log import setup_log
@@ -19,7 +19,7 @@ def setup_config(args, config_path=None):
     curr_path = Path.cwd()
     if config_path is None:
         config_path = Path(args['config_file']).parent
-    with working_directory(config_path):
+    with chmkdir(config_path):
         for filename in ['config.json', 'secret.json', 'rename.json', 'follow.json']:
             check_and_copy(curr_path / 'docs' / 'example' /
                            filename, Path('.') / filename)
@@ -155,7 +155,12 @@ def organize(ctx, apply):
     for typ, sub_path in cfg['path']['sub_path'].items():
         p = Path(cfg['path']['source']) / cfg['path']['sub_path'][typ]
         ctx.obj['logger'].info(f'Organizing "{typ}" path: {p}')
+        ctx.obj['logger'].info(f'Renaming')
         org.rename_recursive(p, apply)
+        ctx.obj['logger'].info(f'Moving')
+        src = p
+        tgt = Path(cfg['path']['target']) / cfg['path']['sub_path'][typ]
+        org.move_files(src, tgt, apply)
 
 
 @ animaid.command()
