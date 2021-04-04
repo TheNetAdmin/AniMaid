@@ -95,10 +95,15 @@ class download_database(base_database):
                 'download_status': 'needDownload'
             }
             if 'team' in record.keys():
-                download_record['team'] = {
+                download_record['record']['team'] = {
                     'name': record['team']['name'],
                     'icon': record['team']['icon']
                 }
+            # Find bangumi icon
+            for tag in record['tags']:
+                if 'bangumi' in tag and 'icon' in tag['bangumi']:
+                    download_record['record']['icon'] = tag['bangumi']['icon']
+                    break
             self.logger.info(f'Found new record: {record["title"]}', extra={
                              'record': {'id': record['_id'], 'title': record['title']}})
             if apply:

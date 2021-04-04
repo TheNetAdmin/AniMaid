@@ -42,11 +42,17 @@ class slack_client:
                         "text": r['title']
                 }
             }
-            if 'team' in r.keys() and r['team']['icon'] is not None:
+            if 'icon' in r['record'].keys() and r['record']['icon'] is not None:
                 blk["accessory"] = {
                     "type": "image",
-                    "image_url": 'https://bangumi.moe/' + r['team']['icon'],
-                    "alt_text": r['team']['name']
+                    "image_url": 'https://bangumi.moe/' + r['record']['icon']
+                }
+
+            elif 'team' in r['record'].keys() and r['record']['team']['icon'] is not None:
+                blk["accessory"] = {
+                    "type": "image",
+                    "image_url": 'https://bangumi.moe/' + r['record']['team']['icon'],
+                    "alt_text": r['record']['team']['name']
                 }
             msg_block.append(blk)
 
