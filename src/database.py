@@ -18,7 +18,7 @@ class base_backend:
         self.config = config
         self.secret = secret
 
-    def __del__(self):
+    def close(self):
         pass
 
 
@@ -32,19 +32,19 @@ class json_backend(base_backend):
         self.lock = FileLock(self.file + '.lock', timeout=50)
         self.modified = False
         self.logger = logging.getLogger('animaid.database.json_backend')
-        with self.lock:
-            with open(self.file, 'r') as f:
-                self.data = json.load(f)
+        self.lock.acquire()
+        with open(self.file, 'r') as f:
+            self.data = json.load(f)
 
-    def __del__(self):
+    def close(self):
         if self.modified:
-            self.logger.info(f'Database {self.file} is modified, saving')
-            with self.lock:
-                with open(self.file, 'w') as f:
-                    json.dump(self.data, f, indent=4,
-                            default=self.encoder, ensure_ascii=False)
+            self.logger.debug(f'Database {self.file} is modified, saving')
+            with open(self.file, 'w') as f:
+                json.dump(self.data, f, indent=4,
+                        default=self.encoder, ensure_ascii=False)
         else:
-            self.logger.info(f'Database {self.file} not modified, no need to save')
+            self.logger.debug(f'Database {self.file} not modified, no need to save')
+        self.lock.release()
     
     def insert(self, object):
         self.modified = True
@@ -79,6 +79,9 @@ def make_backend(config, secret):
 class base_database():
     def __init__(self, config, secret):
         self.backend = make_backend(config, secret)
+    
+    def close(self):
+        self.backend.close()
 
 
 class download_database(base_database):

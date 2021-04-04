@@ -3,6 +3,15 @@ from log4mongo.handlers import MongoHandler
 from .utils import chmkdir
 from pathlib import Path
 
+mongo_handler = None
+
+level_map = {
+    "debug": logging.DEBUG,
+    "info": logging.INFO,
+    "warning": logging.WARNING,
+    "error": logging.ERROR,
+    "critical": logging.CRITICAL
+}
 
 def make_log_handler(config, secret):
     log_format = logging.Formatter(
@@ -17,30 +26,23 @@ def make_log_handler(config, secret):
     elif config['backend'] == 'mongodb':
         ms = secret['mongodb']
         handler = MongoHandler(host=ms['addr'], port=ms['port'], username=ms['username'],
-                               password=ms['password'], database_name=config['database'], collection=config['collection'])
+                                     password=ms['password'], database_name=config['database'], collection=config['collection'])
     return handler
 
 
-level_map = {
-    "debug": logging.DEBUG,
-    "info": logging.INFO,
-    "warning": logging.WARNING,
-    "error": logging.ERROR,
-    "critical": logging.CRITICAL
-}
-
-
 def setup_log(config, secret):
-    for log in ['default', 'crash']:
-        if log == 'default':
+    for log_type in ['default', 'crash']:
+        if log_type == 'default':
             logger = logging.getLogger()
         else:
-            logger = logging.getLogger(f'animaid.{log}')
-        for handler_config in config[log]:
+            logger = logging.getLogger(f'animaid.{log_type}')
+
+        logger.setLevel(logging.INFO)
+        for handler_config in config[log_type]:
             handler = make_log_handler(handler_config, secret)
-            logger.addHandler(handler)
             if 'level' in handler_config:
-                level = level_map[handler_config['level']]
+                print(f'Setting {handler_config["level"]} level for handler {handler_config}')
+                handler.setLevel(level_map[handler_config['level']])
             else:
-                level = logging.INFO
-            logger.setLevel(level)
+                handler.setLevel(logging.INFO)
+            logger.addHandler(handler)
