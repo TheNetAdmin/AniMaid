@@ -140,11 +140,11 @@ class organizer:
                         nt, applied = r.apply(t, typ)
                         if applied:
                             t = nt
-                            self.logger.debug(f'    --[{r.desc:30}]-->{t.name}')
+                            self.logger.debug(f'    --[{r.desc:40}]-->{t.name}')
                         else:
                             if t != nt:
                                 raise Exception(f'Rule [{m.desc:40}] not applied but path changed from {t} to {nt}')
-                    self.logger.debug(f'    --[{"Final result":30}]-->{t}')
+                    self.logger.debug(f'    --[{"Final result":40}]-->{t}')
                     target_files[typ][i] = t
 
             # Check rules
