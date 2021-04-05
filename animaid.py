@@ -51,7 +51,7 @@ def close_databases(ctx):
 
 @contextlib.contextmanager
 def use_databases(ctx):
-    lock = FileLock('data/animaid.lock', timeout=10)
+    lock = FileLock('data/animaid.lock', timeout=30)
     with lock:
         open_databases(ctx)
         try:
