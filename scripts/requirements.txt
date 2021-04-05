@@ -8,7 +8,6 @@ PlexAPI>=4.1.2
 python_dateutil>=2.8.1
 setuptools
 wheel
+pymongo
 log4mongo
-requests
-slack_webhook
 filelock
