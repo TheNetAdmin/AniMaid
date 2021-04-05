@@ -15,11 +15,15 @@
     },
     "path": {
         "source": "/files/Downloads/Anima",
-        "target": "/files/Media"
+        "target": "/files/Media",
+        "sub_path": {
+            "ongoing": "AnimaOngoing",
+            "bundle": "AnimaBundle"
+        }
     },
     "downloader": "qbittorrent",
-    "slack": true,
-    "plex": true,
+    "slack": false,
+    "plex": false,
     "logging": {
         "default": [
             {
