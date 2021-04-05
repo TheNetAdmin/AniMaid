@@ -33,10 +33,11 @@ AniMaid 是一个番剧自动下载与整理的工具。AniMaid 可以读取 [ba
    # 整理归档
    $ python3 animaid.py organize
    ```
-   - 重命名的过程可以去掉文件名内的多余信息（例如清晰度 `[1080p]` 或者视频格式 `[MKV]` 等）
+   - 重命名的过程可以去掉文件名内的多余信息（例如清晰度 `[1080p]` 或者视频格式 `[MKV]` 等标签，方便查看也方便媒体服务器读取相关信息）
    - 一个重命名样例输出
     ```shell
-    TODO
+    origin: [KTXP][LOG_HORIZON_Entaku_Houkai][01][BIG5][X264_AAC][720p](48920FFC).mp4 
+        --> Log Horizon S3 01.mp4
     ```
 
 
