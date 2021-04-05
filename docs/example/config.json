@@ -34,7 +34,8 @@
         "crash": [
             {
                 "backend": "file",
-                "path": "log/crash.log"
+                "path": "log/crash.log",
+                "level": "debug"
             }
         ]
     }
