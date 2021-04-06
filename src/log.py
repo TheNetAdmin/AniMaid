@@ -46,5 +46,4 @@ def setup_log(config, secret):
             else:
                 level = logging.INFO
             handler.setLevel(level)
-            print(f'Setting {level} level for logging handler {handler_config}, add to logger {logger.name}')
             logger.addHandler(handler)

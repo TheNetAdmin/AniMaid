@@ -207,6 +207,9 @@ class source_database(base_database):
                     for s in t['source']:
                         if s['site'] == site:
                             s['last_update'] = time
+                            # TODO: Add new class method to update field
+                            #       Not explicitly set modified as True
+                            self.backend.modified = True
         else:
             raise Exception(f'Backend not supported: {self.backend.type}')
 

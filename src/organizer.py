@@ -130,7 +130,13 @@ class organizer:
             # 1. Rename current dir
             # Determine and filter files
             source_files = self.filter_files(path)
+            # Enable/Disable renaming for file/dir
+            for typ in ['dir', 'file']:
+                if not self.config[typ]['rename']:
+                    source_files[typ] = []
+            # Prepare target file list
             target_files = copy.deepcopy(source_files)
+
 
             # Apply rename rules
             for typ in ['dir', 'file']:
