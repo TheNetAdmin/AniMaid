@@ -4,7 +4,7 @@ AniMaid 是一个番剧自动下载与整理的工具。AniMaid 可以读取 [ba
 
 ## 使用
 
-1. 安装 qBittorrent 与 Python 3 环境，具体说明参见[安装文档]()
+1. 安装 qBittorrent 与 Python 3 环境，具体说明参见[安装文档](.docs/README.md)
 2. 一些设置工作
    1. **配置**：在 `config/config.json` 内设置番剧的存放地址 `"path"` 字段
       - 预设的配置文件里定义了两种番剧类型 `ongoing` 即当季正在播放的番剧，以及 `bundle` 即合集版番剧
