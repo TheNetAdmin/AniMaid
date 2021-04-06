@@ -25,7 +25,7 @@ AniMaid 是一个番剧自动下载与整理的工具。AniMaid 可以读取 [ba
    # 仅从 bangumi.moe 更新数据库并发现新番剧，不新建下载任务
    $ python3 animaid.py update
    # 通过以上命令的输出确定自动发现的番剧没有问题后，通过如下命令更新数据库
-   # 并自动新建下载任务（仅新建任务，没有送入 qBittorrent 也没有开始下载）
+   # 并自动新建下载任务（仅新建任务信息，没有送入 qBittorrent 也没有开始下载）
    $ python3 animaid.py update -a
    ```
 4. 开始下载
