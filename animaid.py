@@ -37,6 +37,13 @@ def setup_config(args, config_path=None):
         if data_config['backend'] == 'json' and not Path(data_config['path']).exists():
             with open(data_config['path'], 'w') as f:
                 f.write('[]')
+    
+def setup_dirs(config):
+    # Creating download and media dirs
+    for sub_path in config['path']['sub_path']:
+        for parent in ['source', 'target']:
+            (Path(parent) / sub_path).mkdir(parents=True, exist_ok=True)
+
 
 def open_databases(ctx):
     ctx.obj['data'] = {
@@ -76,6 +83,7 @@ def animaid(ctx, config, secret, rename, follow):
     for file_type in ['config', 'secret', 'rename', 'follow']:
         with open(ctx.obj[f'{file_type}_file']) as f:
             ctx.obj[file_type] = json.load(f)
+    setup_dirs(ctx.obj['config'])
 
     # Setup log
     setup_log(ctx.obj['config']['logging'], ctx.obj['secret'])
