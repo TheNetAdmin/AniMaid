@@ -134,13 +134,3 @@ AniMaid 可以自动去除这些文件名内的标签，方便用户查看，也
         }
     ```
 5. `rename_rule` 串联了一组重命名规则，具体的重命名效果可以查看命令行输出日志
-
-## 使用截图
-
-**PLEX 媒体库**
-
-![plex](https://github.com/TheNetAdmin/images/raw/master/animaid/plex.png)
-
-**Slack 通知**
-
-![slack](https://github.com/TheNetAdmin/images/raw/master/animaid/slack.png)

@@ -5,7 +5,7 @@
 
 AniMaid 是一个番剧自动下载与整理的工具。AniMaid 可以读取 [bangumi.moe](https://bangumi.moe) 提供的 [API](https://github.com/BangumiMoe) 来获取各个字幕组最新发布的番剧，然后通过用户预先定义的规则筛选番剧，自动加入 qBittorrent 下载，并在下载完成后进行重命名和归档整理，方便本地观看或者在 PLEX 等媒体服务器上观看。
 
-一些[使用截图](./docs/README.md)
+一些[使用截图](./docs/screenshots.md)
 
 ## 使用
 
