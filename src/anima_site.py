@@ -65,7 +65,7 @@ class bangumi_moe_site(site):
         try:
             res['torrents'] = sorted(res['torrents'], key=lambda x: parse_time(x['publish_time']), reverse=True)
         except KeyError as e:
-            self.logger.debug(f'Invalid response {res}')
+            self.logger.error(f'Invalid response {res}')
             raise e
         for t in res['torrents']:
             for i in ignore_properties:
