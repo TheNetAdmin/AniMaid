@@ -78,6 +78,10 @@
                     "target": "Log Horizon S3"
                 },
                 {
+                    "source": "[SSSS.DYNAZENON Voice Drama]",
+                    "target": "SSSS.DYNAZENON Voice Drama"
+                },
+                {
                     "source": "[SSSS.DYNAZENON]",
                     "target": "SSSS.DYNAZENON"
                 },

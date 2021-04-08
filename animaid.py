@@ -43,7 +43,7 @@ def check_dirs(ctx):
     config = ctx.obj['config']
     for sub_path in config['path']['sub_path']:
         for parent in ['source', 'target']:
-            p = Path(parent) / sub_path
+            p = Path(config['path'][parent]) / config['path']['sub_path'][sub_path]
             p = p.resolve()
             if not p.exists() or not p.is_dir():
                 raise Exception(f'Dir not exists, please create it or point to a valid dir: {p}')
