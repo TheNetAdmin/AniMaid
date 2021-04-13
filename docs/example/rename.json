@@ -74,6 +74,10 @@
             "regex": false,
             "entries": [
                 {
+                    "source": "Kuro Gal",
+                    "target": "Kuro Gal ni Natta kara Shin`yuu to Shite Mita"
+                },
+                {
                     "source": "[LOG_HORIZON_Entaku_Houkai]",
                     "target": "Log Horizon S3"
                 },
@@ -177,7 +181,8 @@
                 "TUcaptions",
                 "YYDM-11FANS",
                 "UHA-WINGS&LoliHouse",
-                "Nekomoe kissaten[(&LoliHouse)]"
+                "Nekomoe kissaten[(&LoliHouse)]",
+                "Nekomoe kissaten"
             ]
         },
         {
@@ -283,7 +288,8 @@
                 "\\[招.*?\\]",
                 "YY-",
                 "\\.JYFanSub-",
-                "\\ V2"
+                "\\ V2",
+                "\\[01-12 Fin\\]"
             ]
         },
         {
