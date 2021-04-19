@@ -74,6 +74,10 @@
             "regex": false,
             "entries": [
                 {
+                    "source": "[Kobayashi-san Chi no Maid Dragon - Minidora]",
+                    "target": "Kobayashi-san Chi no Maid Dragon - Minidora"
+                },
+                {
                     "source": "Kuro Gal",
                     "target": "Kuro Gal ni Natta kara Shin`yuu to Shite Mita"
                 },
@@ -180,9 +184,9 @@
                 "SumiSora",
                 "TUcaptions",
                 "YYDM-11FANS",
-                "UHA-WINGS&LoliHouse",
-                "Nekomoe kissaten[(&LoliHouse)]",
-                "Nekomoe kissaten"
+                "UHA-WINGS",
+                "Nekomoe kissaten",
+                "Airota"
             ]
         },
         {
