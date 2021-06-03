@@ -1,7 +1,8 @@
 import contextlib
-from pathlib import Path
 import os
 import shutil
+from pathlib import Path
+
 
 @contextlib.contextmanager
 def chmkdir(path):
@@ -25,6 +26,7 @@ def chdir(path):
         yield
     finally:
         os.chdir(prev_cwd)
+
 
 def check_and_copy(source, target):
     if not target.exists():
