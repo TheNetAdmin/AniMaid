@@ -326,7 +326,7 @@ class bangumi_moe_database(base_database):
                 if 'team_tag_id' in team:
                     if 'tag_ids' in t.keys():
                         for tag_id in t['tag_ids']:
-                            if tag_id == team['team_tag_id']:
+                            if tag_id == team['team_tag_id'] and t not in res:
                                 res.append(t)
             return res
         else:
