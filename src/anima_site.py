@@ -3,6 +3,7 @@ import re
 
 import requests
 from dateutil.parser import parse as parse_time
+from json import JSONDecodeError
 
 
 class site:
@@ -64,7 +65,12 @@ class bangumi_moe_site(site):
         return team
 
     def _search(self, url, ignore_properties=["introduction"]):
-        res = requests.get(url=url).json()
+        try:
+            res = requests.get(url=url).json()
+        except JSONDecodeError as e:
+            self.logger.error(f"Anima site request is invalid, url: {url}")
+            raise e
+
         try:
             res["torrents"] = sorted(
                 res["torrents"],
@@ -80,7 +86,7 @@ class bangumi_moe_site(site):
         if len(res) == 0:
             raise Exception(
                 f"No data responded, something is wrong with the request to bangumi.moe, url: {url}",
-                extra={"info": {"team": team, "url": url}},
+                extra={"info": {"url": url}},
             )
         return res
 
