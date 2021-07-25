@@ -18,7 +18,7 @@ level_map = {
 
 def make_log_handler(config, secret):
     log_format = logging.Formatter(
-        "[%(asctime)s][%(filename)20s:%(lineno)4s - %(funcName)20s() ] %(message)s"
+        "[%(asctime)s][%(filename)20s:%(lineno)4s - %(funcName)20s() ][%(levelname)5s] %(message)s"
     )
     if config["backend"] == "file":
         Path(config["path"]).parent.mkdir(parents=True, exist_ok=True)
