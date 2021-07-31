@@ -35,7 +35,10 @@ def setup_config(args, config_path=None):
             )
     # 2. Creating database if not exists
     with open(args["config_file"], "r") as f:
-        config = json.load(f)
+        try:
+            config = json.load(f)
+        except json.decoder.JSONDecodeError as e:
+            raise Exception(f"JSON file format error, file: {f}, error: {e.msg}")
     Path("data").mkdir(parents=True, exist_ok=True)
     for data in config["data"]:
         data_config = config["data"][data]
@@ -111,7 +114,10 @@ def animaid(ctx, config, secret, rename, follow):
     setup_config(ctx.obj)
     for file_type in ["config", "secret", "rename", "follow"]:
         with open(ctx.obj[f"{file_type}_file"]) as f:
-            ctx.obj[file_type] = json.load(f)
+            try:
+                ctx.obj[file_type] = json.load(f)
+            except json.decoder.JSONDecodeError as e:
+                raise Exception(f"JSON file format error, file: {f.name}, error: {e.msg}")
 
     # Setup log
     setup_log(ctx.obj["config"]["logging"], ctx.obj["secret"])
