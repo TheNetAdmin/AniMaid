@@ -69,7 +69,7 @@ class bangumi_moe_site(site):
             res = requests.get(url=url).json()
         except JSONDecodeError as e:
             self.logger.error(f"Anima site request is invalid, url: {url}")
-            raise e
+            raise Exception(f"Anima site request is invalid, url: {url}")
 
         try:
             res["torrents"] = sorted(
