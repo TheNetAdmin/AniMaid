@@ -44,7 +44,7 @@
             "regex": true,
             "entries": [
                 {
-                    "source": "\\s*[v\\d]+\\.[a-zA-Z\\d\\.]+$",
+                    "source": "\\s*[ABv\\d]+\\.[a-zA-Z\\d\\.]+$",
                     "target": ""
                 }
             ]

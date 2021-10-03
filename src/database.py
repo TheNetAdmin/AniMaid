@@ -95,6 +95,10 @@ class download_database(base_database):
     def search(self, record: dict) -> dict:
         if self.backend.type == "json":
             for entry in self.backend.data:
+                if "_id" not in entry["record"]:
+                    raise Exception(f"Key '_id' not in {entry['record']}")
+                if "_id" not in record:
+                    raise Exception(f"Key '_id' not in {record}")
                 if (
                     entry["record"]["site"] == "bangumi_moe"
                     and entry["record"]["_id"] == record["_id"]
