@@ -7,7 +7,8 @@
                     ".mkv",
                     ".mka",
                     ".ass",
-                    ".mp4"
+                    ".mp4",
+                    ".flac"
                 ]
             }
         ],
@@ -74,8 +75,72 @@
             "regex": false,
             "entries": [
                 {
-                    "source": "[Kobayashi-san Chi no Maid Dragon - Minidora]",
-                    "target": "Kobayashi-san Chi no Maidragon S"
+                    "source": "YuYuYu - Dai Mankai no Shou",
+                    "target": "Yuuki Yuuna wa Yuusha de Aru Dai Mankai no Shou"
+                },
+                {
+                    "source": "[Fena Pirate Princess]",
+                    "target": "Fena Pirate Princess"
+                },
+                {
+                    "source": "[Digimon Adventure]",
+                    "target": "Digimon Adventure"
+                },
+                {
+                    "source": "[Kageki Shoujo!!]",
+                    "target": "Kageki Shojo The Curtain Rises"
+                },
+                {
+                    "source": "[SCARLET NEXUS]",
+                    "target": "SCARLET NEXUS"
+                },
+                {
+                    "source": "[Meikyuu Black Company]",
+                    "target": "Meikyuu Black Company"
+                },
+                {
+                    "source": "[Sonny Boy]",
+                    "target": "Sonny Boy"
+                },
+                {
+                    "source": "Hyakuman no Inochi no Ue ni Ore wa Tatteiru S02",
+                    "target": "100 man no Inochi no Ue ni Ore wa Tatte Iru 2021"
+                },
+                {
+                    "source": "Cheat Kusushi no Slow Life",
+                    "target": "Cheat Kusushi no Slow Life Isekai ni Tsukurou Drugstore"
+                },
+                {
+                    "source": "ゴッドイーター",
+                    "target": "God Eater"
+                },
+                {
+                    "source": "[Kobayashi-san Chi no Maid Dragon S]",
+                    "target": "Kobayashi-san Chi no Maid Dragon S"
+                },
+                {
+                    "source": "[Kobayashi-san Chi no Maid Dragon S2]",
+                    "target": "Kobayashi-san Chi no Maid Dragon S"
+                },
+                {
+                    "source": "Ore, Tsushima Web ver.",
+                    "target": "Ore, Tsushima"
+                },
+                {
+                    "source": "Hamehura X",
+                    "target": "My Next Life as a Villainess All Routes Lead to Doom X"
+                },
+                {
+                    "source": "煋红",
+                    "target": "Mars Red"
+                },
+                {
+                    "source": "[Ijiranaide Nagatoro-san]",
+                    "target": "Ijiranaide Nagatoro-san"
+                },
+                {
+                    "source": "[Super Cub]",
+                    "target": "Super Cub"
                 },
                 {
                     "source": "Kuro Gal",
@@ -166,6 +231,7 @@
                 "VCB",
                 "FLsnow",
                 "LoliHouse",
+                "LoliIHouse",
                 "Lilith-Raws",
                 "DD",
                 "KTXP",
@@ -186,7 +252,10 @@
                 "YYDM-11FANS",
                 "UHA-WINGS",
                 "Nekomoe kissaten",
-                "Airota"
+                "Airota",
+                "PSNRip",
+                "MMSUB",
+                "SFEO-Raws"
             ]
         },
         {
@@ -221,6 +290,7 @@
             "suffix": ".*?\\]\\s*",
             "entries": [
                 "(1080)[pP]",
+                "(816)[pP]",
                 "Ma10[pP]",
                 "BDRip",
                 "WebRip",
@@ -235,6 +305,7 @@
                 "AVC",
                 "CHT",
                 "CHS",
+                "CHJ_JAP",
                 "JPSC",
                 "JPTC",
                 "SRT",
@@ -242,6 +313,7 @@
                 "1080[pP]_Ma10P",
                 "1080[pP]_Hi10P",
                 "720[pP]",
+                "864[pP]",
                 "1920[xX]1080",
                 "BD[Rr][Ii][Pp][\\-\\s\\w\\d\\_]*",
                 "[(Ma)(Hi)]*10p_[(2160)(1080)(720)]*p[\\_\\w]*",
@@ -259,7 +331,10 @@
                 "H264_FLAC",
                 "HEVC[\\s\\w\\d]*FLAC",
                 "HEVC_ALS",
-                "BD"
+                "BD",
+                "B-Global",
+                "5\\.1ch",
+                "ASSx2"
             ]
         },
         {
@@ -387,7 +462,7 @@
             ]
         },
         {
-            "description": "Remove spaces",
+            "description": "Strip spaces",
             "type": "remove",
             "file": "all",
             "regex": true,
