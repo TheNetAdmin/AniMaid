@@ -23,8 +23,13 @@ class slack_client:
         for r in records:
             blk = {"type": "section", "text": {"type": "mrkdwn", "text": r["title"]}}
             icon_found = False
-            dr = r["record"]
-            for tag in dr["tags"]:
+
+            if "record" in r:
+                dr = r["record"]
+            else:
+                dr = r
+
+            for tag in dr.get("tags", []):
                 if "bangumi" in tag and "icon" in tag["bangumi"]:
                     blk["accessory"] = {
                         "type": "image",
@@ -51,6 +56,9 @@ class slack_client:
 
     def notify_new_records(self, records):
         self._notify_records("@channel Master~ 刚发现了这些新番，并加入下载列表了哟~", records)
+
+    def notify_new_potential_records(self, records):
+        self._notify_records("@channel Master~ 要不要考虑一下这些番剧？", records)
 
     def notify_organize(self):
         self.notify_single("@channel Master~ 已经帮您打扫完毕，所有文件已经整理并入库了哟~")

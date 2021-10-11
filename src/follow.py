@@ -59,3 +59,32 @@ def get_follow_records(follow, bangumi_moe_db, source_db):
                 r["track_type"] = track["type"]
                 result_records.append(r)
     return result_records
+
+
+def get_notify_records(follow, all_records, source_db):
+    # Setup filter
+    global_filters = {}
+    for name, filter_config in follow["filter"].items():
+        global_filters[name] = make_filter(filter_config, [])
+
+    result_records = []
+    for track in follow.get("notify", []):
+        # Setup filter
+        track_filters = []
+        track_filters.append(global_filters["default"])
+        if "filter" in track:
+            for f in track["filter"]:
+                tf = make_filter(f, global_filters)
+                track_filters.append(tf)
+
+        # Search records and apply filters
+        track_records = [
+            r for r in all_records if source_db.match(track["team_name"], r)
+        ]
+        for f in track_filters:
+            track_records = f.apply(track_records)
+
+        # Add to result
+        result_records += track_records
+
+    return result_records

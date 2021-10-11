@@ -85,5 +85,18 @@
                 }
             ]
         }
+    ],
+    "notify": [
+        {
+            "team_name": "LoliHouse",
+            "filter": [
+                {
+                    "type": "include",
+                    "word_content": [
+                        "原盘"
+                    ]
+                }
+            ]
+        }
     ]
 }

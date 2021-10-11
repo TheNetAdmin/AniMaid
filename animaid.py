@@ -12,7 +12,7 @@ from src.anima_site import bangumi_moe_site
 from src.database import (bangumi_moe_database, download_database,
                           source_database)
 from src.downloader import make_downloader_client
-from src.follow import get_follow_records
+from src.follow import get_follow_records, get_notify_records
 from src.log import setup_log
 from src.media_server import plex_server
 from src.organizer import organizer
@@ -170,16 +170,27 @@ def update(ctx, max_pages, force, apply_download, team_alias):
             teams_to_update = [source_db.search_by_name(team_alias)]
         else:
             teams_to_update = source_db.all()
+
+        all_new_records = []
         for team in teams_to_update:
-            bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
+            records = bangumi_moe_db.update(team=team, max_pages=max_pages, force=force)
+            all_new_records += records
             source_db.update(team)
+
         # 2. Parse user-defined follow rules and find corresponding recent records
-        ctx.obj["logger"].info("Parse follow rules and find  records")
+        ctx.obj["logger"].info("Parse notify rules and notify in slack")
+        notify_records = get_notify_records(ctx.obj['follow'], all_new_records, source_db)
+        if len(notify_records) > 0:
+            ctx.obj['slack'].notify_new_potential_records(notify_records)
+
+        ctx.obj["logger"].info("Parse follow rules and find records")
         records = get_follow_records(ctx.obj["follow"], bangumi_moe_db, source_db)
         download_db = ctx.obj["data"]["download"]
+
         # 3. Write discovered records to download database
         for r in records:
             download_db.insert(r, apply_download)
+
         # 4. Update download states from downloader
         ctx.obj["logger"].info("Update download states from downloader")
         downloader = make_downloader_client(ctx.obj["config"], ctx.obj["secret"])

@@ -47,6 +47,14 @@ class record_word_filter(base_filter):
         return False
 
 
+class record_word_content_filter(base_filter):
+    def cond(self, target: dict) -> bool:
+        for word in self.config["word_content"]:
+            if word in target["introduction"]:
+                return True
+        return False
+
+
 class record_date_filter(base_filter):
     def cond(self, target: dict) -> bool:
         start_time = parse_time(self.config["date"][0])
@@ -68,6 +76,8 @@ def _make_filter(config):
         )
     if "word" in config.keys():
         return record_word_filter(config)
+    elif "word_content" in config.keys():
+        return record_word_content_filter(config)
     elif "date" in config.keys():
         return record_date_filter(config)
     elif "extension" in config.keys():

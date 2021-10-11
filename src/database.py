@@ -236,6 +236,20 @@ class source_database(base_database):
         else:
             raise Exception(f"Backend not supported: {self.backend.type}")
 
+    def match(self, team_name, record) -> bool:
+        """Check if 'record' is from team with 'team_name'"""
+        team = self.search_by_name(team_name)
+        if team is None:
+            raise Exception(f"Team [{team_name}] not found")
+        for tinfo in team["source"]:
+            if "team_id" in tinfo and tinfo["team_id"] == record["team_id"]:
+                return True
+            if "team_tag_id" in tinfo and tinfo["team_tag_id"] in record.get(
+                "tag_ids", []
+            ):
+                return True
+        return False
+
 
 class bangumi_moe_database(base_database):
     def __init__(self, config, secret):
@@ -289,12 +303,14 @@ class bangumi_moe_database(base_database):
         if self.search(torrent) is not None:
             return False
         if self.backend.type == "json":
-            self.backend.insert(torrent)
+            t = copy.deepcopy(torrent)
+            del t["introduction"]
+            self.backend.insert(t)
         else:
             raise Exception(f"Backend not supported: {self.backend.type}")
         return True
 
-    def update(self, team, max_pages=2, force=False):
+    def update(self, team, max_pages=2, force=False) -> list:
         team = self.flat_team_info(team)
         update_interval = 2
         if "update_interval" in team.keys():
@@ -330,13 +346,14 @@ class bangumi_moe_database(base_database):
             need_update = True
 
         # Update
+        all_records = []
         if need_update:
             log_info(f'Updating [{team["alias"]:20}]')
             cnt_new_records = 0
             for p in range(max_pages):
                 sleep(2)
                 log_info(f"Page `Team` [{p}]")
-                records = self.site.search_by_team(team, p)["torrents"]
+                records = self.site.search_by_team(team, p, [])["torrents"]
                 if "team_tag_id" in team:
                     log_info(f"Page `Search` [{p}]")
                     records += self.site.searcy_by_tag(team["team_tag_id"], p)[
@@ -348,6 +365,7 @@ class bangumi_moe_database(base_database):
                     succ = self.insert(r)
                     if succ:
                         cnt_new_records += 1
+                        all_records.append(r)
                     else:
                         if not force:
                             log_info(
@@ -357,11 +375,14 @@ class bangumi_moe_database(base_database):
                             stop = True
                             break
                         else:
+                            all_records.append(r)
                             stop = False
                 if stop:
                     break
             log_info(f"Inserted {cnt_new_records} new records to bangumi_moe database")
             # TODO: parse one more page to guarantee coverage
+
+        return all_records
 
     def search_by_team(self, team) -> List[Dict]:
         team = self.flat_team_info(team)
