@@ -20,7 +20,8 @@
                     "CDs",
                     "Menus",
                     "Glossaries",
-                    "Scans"
+                    "Scans",
+                    "Previews"
                 ]
             }
         ]
@@ -74,6 +75,46 @@
             "file": "all",
             "regex": false,
             "entries": [
+                {
+                    "source": "[Irodorimidori]",
+                    "target": "Irodorimidori"
+                },
+                {
+                    "source": "[Princess Connect! Re-Dive S2]",
+                    "target": "Princess Connect Re Dive S2"
+                },
+                {
+                    "source": "迷宫标记者",
+                    "target": "SAKUGAN"
+                },
+                {
+                    "source": "[Eiga Daisuki Pompo-san]",
+                    "target": "Eiga Daisuki Pompo-san"
+                },
+                {
+                    "source": "[Mahou Tsukai no Yome Nishi no Shounen to Seiran no Kishi]",
+                    "target": "Mahou Tsukai no Yome Nishi no Shounen to Seiran no Kishi"
+                },
+                {
+                    "source": "[Blue Period]",
+                    "target": "Blue Period"
+                },
+                {
+                    "source": "[World Trigger S3]",
+                    "target": "World Trigger S3"
+                },
+                {
+                    "source": "[SAKUGAN]",
+                    "target": "SAKUGAN"
+                },
+                {
+                    "source": "[Ryuu to Sobakasu no Hime]",
+                    "target": "Ryuu to Sobakasu no Hime"
+                },
+                {
+                    "source": "[Ousama_Game]",
+                    "target": "Ousama Game"
+                },
                 {
                     "source": "YuYuYu - Dai Mankai no Shou",
                     "target": "Yuuki Yuuna wa Yuusha de Aru Dai Mankai no Shou"
@@ -255,7 +296,14 @@
                 "Airota",
                 "PSNRip",
                 "MMSUB",
-                "SFEO-Raws"
+                "SFEO-Raws",
+                "JYFanSub",
+                "Comicat",
+                "KissSub",
+                "MCE",
+                "Hanamaru",
+                "subbers",
+                "TD-RAWS"
             ]
         },
         {
@@ -299,6 +347,7 @@
                 "MKV",
                 "MP4",
                 "GB_MP4",
+                "GB",
                 "x26[54]",
                 "H264",
                 "WEB",
@@ -315,6 +364,7 @@
                 "720[pP]",
                 "864[pP]",
                 "1920[xX]1080",
+                "1920[xX]800",
                 "BD[Rr][Ii][Pp][\\-\\s\\w\\d\\_]*",
                 "[(Ma)(Hi)]*10p_[(2160)(1080)(720)]*p[\\_\\w]*",
                 "x264_[2]*flac",
@@ -334,7 +384,9 @@
                 "BD",
                 "B-Global",
                 "5\\.1ch",
-                "ASSx2"
+                "ASSx2",
+                "UHDRip",
+                "Multiple Subtitle"
             ]
         },
         {
@@ -347,7 +399,9 @@
             "entries": [
                 "BD",
                 "DVD",
-                "[0-9A-F]{8}"
+                "[0-9A-F]{8}",
+                "WebRip",
+                "1280x720"
             ]
         },
         {
@@ -387,6 +441,10 @@
             "file": "all",
             "regex": false,
             "entries": [
+                {
+                    "source": "‐",
+                    "target": " "
+                },
                 {
                     "source": "[",
                     "target": " "
