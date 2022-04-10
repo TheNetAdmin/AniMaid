@@ -56,6 +56,9 @@ class renamer:
                     name = re.sub(e, "", name)
                 else:
                     name = name.replace(e, "")
+        elif self.type == "remove_final_brackets":
+            if name.startswith("[") and name.count("]") == 1:
+                name = re.sub(r"[\[\]]", "", name)
         elif self.type == "check":
             for e in self.entries:
                 if self.regex:
