@@ -426,6 +426,22 @@
             ]
         },
         {
+            "description": "Remove episode brackets",
+            "type": "remove",
+            "regex": true,
+            "file": "file",
+            "entries": [
+                "\\[(?:\\d\\d)\\]"
+            ]
+        },
+        {
+            "description": "Remove final brackets",
+            "type": "remove_final_brackets",
+            "regex": false,
+            "file": "all",
+            "entries": []
+        },
+        {
             "description": "Check renaming results",
             "type": "check",
             "file": "all",
