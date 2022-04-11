@@ -386,7 +386,8 @@
                 "5\\.1ch",
                 "ASSx2",
                 "UHDRip",
-                "Multiple Subtitle"
+                "Multiple Subtitle",
+                "sc"
             ]
         },
         {
@@ -427,11 +428,11 @@
         },
         {
             "description": "Remove episode brackets",
-            "type": "remove",
+            "type": "remove_episode_brackets",
             "regex": true,
             "file": "file",
             "entries": [
-                "\\[(?:\\d\\d)\\]"
+                "\\[(\\d\\d)\\]"
             ]
         },
         {

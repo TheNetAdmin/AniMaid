@@ -56,6 +56,14 @@ class renamer:
                     name = re.sub(e, "", name)
                 else:
                     name = name.replace(e, "")
+        elif self.type == "remove_episode_brackets":
+            for e in self.entries:
+                if self.regex:
+                    name = re.sub(e, r" \1 ", name)
+                else:
+                    raise Exception(
+                        f"Renamer [remove_episode_brackets] does not accept non-regex rule [{e}]"
+                    )
         elif self.type == "remove_final_brackets":
             if name.startswith("[") and name.count("]") == 1:
                 name = re.sub(r"[\[\]]", "", name)
