@@ -352,7 +352,7 @@ class bangumi_moe_database(base_database):
             cnt_new_records = 0
             for p in range(max_pages):
                 sleep(2)
-                log_info(f"Page `Team` [{p}]")
+                log_info(f"Page [{p}]")
                 records = self.site.search_by_team(team, p, [])["torrents"]
                 if "team_tag_id" in team:
                     log_info(f"Page `Search` [{p}]")
