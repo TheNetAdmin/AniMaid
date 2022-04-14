@@ -71,7 +71,7 @@ class bangumi_moe_site(site):
             self.logger.error(f"Anima site request is invalid, url: {url}")
             raise Exception(f"Anima site request is invalid, url: {url}")
         except Exception as e:
-            self.logger.effor(f"Anima site request failed, url: {url}")
+            self.logger.error(f"Anima site request failed, url: {url}")
             raise e
 
         try:
