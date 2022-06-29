@@ -1,0 +1,267 @@
+[
+    {
+        "name": "Lilith-Raws",
+        "alias": "Lilith-Raws",
+        "_id": "Lilith-Raws",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5d8b24be306f1a0007bd7998",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "VCB-Studio",
+        "alias": "VCB-Studio",
+        "_id": "VCB-Studio",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5596b14ba0b788232ee352ca",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "诸神字幕组",
+        "alias": "Kamigami",
+        "_id": "Kamigami",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "559d1f1db85ffe4359622f5e",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "LoliHouse",
+        "alias": "LoliHouse",
+        "_id": "LoliHouse",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "581b44bfee98e9ca20730e9a",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "幻樱字幕组",
+        "alias": "HYSUB",
+        "_id": "HYSUB",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "59af1b4ed04829c1623b0db9",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "星空字幕组",
+        "alias": "XKsub",
+        "_id": "XKsub",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5d2214af306f1a0007b55b1b",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "极影字幕社",
+        "alias": "KTXP",
+        "_id": "KTXP",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "567b9a702bdec8592924596e",
+                "team_tag_id": "567b9ac32bdec85929245973",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "喵萌奶茶屋",
+        "alias": "Nekomoe_kissaten",
+        "_id": "Nekomoe_kissaten",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "58a9c1c9f5dc363606ab42ec",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "name": "桜都字幕组",
+        "alias": "Sakurato",
+        "_id": "Sakurato",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "57a034aa5cc0696f1ce1a1b1",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "BeanSub",
+        "name": "豌豆字幕组",
+        "alias": "BeanSub",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "567bd94bafc701435d468b57",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "Airota",
+        "name": "千夏字幕組",
+        "alias": "Airota",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "54bb896d76870aad3bb603cf",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "UHA-WINGS",
+        "name": "悠哈璃羽字幕社",
+        "alias": "UHA-WINGS",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5753dd362165b9ba0c485cd2",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "PSNRip",
+        "name": "NC-Raws",
+        "alias": "PSNRip",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "60098fb532f14c000739f911",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "ANK-Raws",
+        "name": "ANK-Raws",
+        "alias": "ANK-Raws",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5492dd902a934ba5288acb1a",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "CC-Anima",
+        "name": "c.c动漫",
+        "alias": "CC-Anima",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "57c322a4ee98e9ca2072f992",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "MMSUB",
+        "name": "咪梦动漫组",
+        "alias": "MMSUB",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5ae8921f2e78648174ce1890",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "KissSub",
+        "name": "爱恋字幕社",
+        "alias": "KissSub",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5539e73add3d5c0b4e82f1fb",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "MCE",
+        "name": "MCE汉化组",
+        "alias": "MCE",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5c587328475bb7b2732fb515",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "DMG",
+        "name": "動漫國字幕組",
+        "alias": "DMG",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "55c0575824180bc3647feb1c",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "FS-Raw",
+        "name": "自由字幕组",
+        "alias": "FS-Raw",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "559cd434b85ffe4359622f4d",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "KissSub",
+        "name": "爱恋字幕社",
+        "alias": "KissSub",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "5539e73add3d5c0b4e82f1fb",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    },
+    {
+        "_id": "LavaAnime",
+        "name": "熔岩动画",
+        "alias": "LavaAnime",
+        "source": [
+            {
+                "site": "bangumi_moe",
+                "team_id": "61eadc3957d0f0000731e41b",
+                "last_update": "2000-04-03T00:00:00"
+            }
+        ]
+    }
+]

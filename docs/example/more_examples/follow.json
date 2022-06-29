@@ -1,0 +1,1955 @@
+{
+    "path": {
+        "ongoing": "AnimaOngoing",
+        "bundle": "Anima"
+    },
+    "filter": {
+        "default": [],
+        "bundle": [],
+        "ongoing": [
+            {
+                "type": "exclude",
+                "word": [
+                    "合集",
+                    "[1-12]",
+                    "[1-13]",
+                    "[01-12]",
+                    "[01-13]",
+                    "[1-",
+                    "[01-"
+                ]
+            }
+        ],
+        "1080p": [
+            {
+                "type": "include",
+                "word": [
+                    "1080p",
+                    "1080P",
+                    "1920X1080",
+                    "1080"
+                ]
+            }
+        ],
+        "chs": [
+            {
+                "type": "include",
+                "word": [
+                    "简体",
+                    "简中",
+                    "简日"
+                ]
+            }
+        ],
+        "2021Winter": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-01-01T00:00:00.000Z",
+                    "2021-04-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021Spring": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-03-20T00:00:00.000Z",
+                    "2021-07-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021Summer": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-06-28T00:00:00.000Z",
+                    "2021-10-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021SummerFall": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-06-28T00:00:00.000Z",
+                    "2022-01-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021SpringSummer": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-03-20T00:00:00.000Z",
+                    "2021-10-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021Fall": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-09-15T00:00:00.000Z",
+                    "2022-01-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2022Winter": [
+            {
+                "type": "include",
+                "date": [
+                    "2022-01-01T00:00:00.000Z",
+                    "2022-04-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2022Spring": [
+            {
+                "type": "include",
+                "date": [
+                    "2022-04-01T00:00:00.000Z",
+                    "2022-07-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2022WinterSpring": [
+            {
+                "type": "include",
+                "date": [
+                    "2022-01-01T00:00:00.000Z",
+                    "2022-07-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2021": [
+            {
+                "type": "include",
+                "date": [
+                    "2021-01-01T00:00:00.000Z",
+                    "2022-01-15T00:00:00.000Z"
+                ]
+            }
+        ],
+        "2020_2022": [
+            {
+                "type": "include",
+                "date": [
+                    "2020-01-01T00:00:00.000Z",
+                    "2022-12-31T00:00:00.000Z"
+                ]
+            }
+        ]
+    },
+    "track": [
+        {
+            "team_name": "LavaAnime",
+            "type": "ongoing",
+            "filter": [
+                "2022Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "派对浪客诸葛孔明"
+                }
+            ]
+        },
+        {
+            "team_name": "KissSub",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter",
+                "1080p",
+                "chs"
+            ],
+            "follow": [
+                {
+                    "name": "魔法少女小圆外传 最终季",
+                    "regex": false
+                }
+            ]
+        },
+        {
+            "team_name": "NC-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2022WinterSpring"
+            ],
+            "follow": [
+                {
+                    "name": "银河英雄传说：全新命题 激战"
+                }
+            ]
+        },
+        {
+            "team_name": "HYSUB",
+            "type": "ongoing",
+            "filter": [
+                "2022Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "古见同学有交流障碍症.*BIG5_MP4",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring",
+                "1080p"
+            ],
+            "regex": true,
+            "follow": [
+                {
+                    "name": "街角魔族 2丁目.*简繁内封"
+                },
+                {
+                    "name": "社畜小姐想被幽灵幼女治愈。.*简繁内封"
+                }
+            ]
+        },
+        {
+            "team_name": "DMG",
+            "type": "ongoing",
+            "filter": [
+                "2022WinterSpring",
+                "1080p",
+                "chs"
+            ],
+            "follow": [
+                {
+                    "name": "莎木"
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [
+                "2022Spring"
+            ],
+            "follow": [
+                {
+                    "name": "理科生坠入情网故尝试证明"
+                },
+                {
+                    "name": "青之芦苇"
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [
+                "2022Spring",
+                "1080p",
+                "chs"
+            ],
+            "follow": [
+                {
+                    "name": "测不准的阿波连同学"
+                },
+                {
+                    "name": "Estab Life: Great Escape"
+                },
+                {
+                    "name": "黑岩射手"
+                },
+                {
+                    "name": "夏日重现"
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2022Spring"
+            ],
+            "follow": [
+                {
+                    "name": "Love All Play"
+                },
+                {
+                    "name": "處刑少女的生存之道"
+                },
+                {
+                    "name": "Love Live！虹咲學園 學園偶像同好會 S02"
+                },
+                {
+                    "name": "群青的開幕曲"
+                },
+                {
+                    "name": "Build Divide - Code White"
+                },
+                {
+                    "name": "勇者、辭職不幹了"
+                },
+                {
+                    "name": "小鳥之翼"
+                },
+                {
+                    "name": "史上最強大魔王轉生為村民 A"
+                },
+                {
+                    "name": "盾之勇者成名錄"
+                },
+                {
+                    "name": "相合之物"
+                },
+                {
+                    "name": "間諜家家酒"
+                },
+                {
+                    "name": "輝夜姬想讓人告白"
+                },
+                {
+                    "name": "女忍者椿的心事"
+                },
+                {
+                    "name": "愛在征服世界後"
+                },
+                {
+                    "name": "魔法使黎明期"
+                },
+                {
+                    "name": "骸骨騎士大人異世界冒險中"
+                },
+                {
+                    "name": "式守同學不只可愛而已"
+                },
+                {
+                    "name": "小書痴的下剋上"
+                },
+                {
+                    "name": "這個僧侶有夠煩"
+                },
+                {
+                    "name": "杜鵑婚約"
+                }
+            ]
+        },
+        {
+            "team_name": "MCE",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "【MCE汉化组】[小林家的龙女仆S][Kobayashi-san Chi no Maidragon S][13][TV未放送][简体][BDrip][1080P][x264 AAC]",
+                    "regex": false
+                }
+            ]
+        },
+        {
+            "team_name": "CC-Anima",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "超異域公主連結"
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "SLOW LOOP"
+                },
+                {
+                    "name": "平家物语"
+                },
+                {
+                    "name": "里亚德录大地"
+                }
+            ]
+        },
+        {
+            "team_name": "MCE",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "不含月鈴姐妹"
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "國王排名"
+                },
+                {
+                    "name": "86 －不存在的戰區"
+                },
+                {
+                    "name": "擅長捉弄人的高木同學"
+                },
+                {
+                    "name": "終末的後宮"
+                },
+                {
+                    "name": "少女前線"
+                },
+                {
+                    "name": "銀河騎士傳 織愛之星"
+                },
+                {
+                    "name": "最遊記"
+                },
+                {
+                    "name": "鬼滅之刃 遊郭篇"
+                },
+                {
+                    "name": "怪人開發部的黑井津小姐"
+                },
+                {
+                    "name": "現實主義勇者的王國重建記"
+                },
+                {
+                    "name": "明日同學的水手服"
+                },
+                {
+                    "name": "戀上換裝娃娃"
+                },
+                {
+                    "name": "半妖的夜叉姬"
+                },
+                {
+                    "name": "失格紋的最強賢者"
+                },
+                {
+                    "name": "佐佐木與宮野"
+                },
+                {
+                    "name": "Futsal Boy"
+                },
+                {
+                    "name": "薔薇王的葬列"
+                },
+                {
+                    "name": "幻想三國誌 天元靈心記"
+                },
+                {
+                    "name": "食鏽末世錄"
+                },
+                {
+                    "name": "Tribe Nine"
+                },
+                {
+                    "name": "飛翔的魔女"
+                },
+                {
+                    "name": "自稱賢者弟子的賢者"
+                },
+                {
+                    "name": "與變成了異世界美少女的大叔一起冒險"
+                },
+                {
+                    "name": "秘密內幕 女警的反擊"
+                },
+                {
+                    "name": "相愛相殺"
+                },
+                {
+                    "name": "東方少年"
+                },
+                {
+                    "name": "東京 24 區"
+                },
+                {
+                    "name": "瓦尼塔斯的手札"
+                },
+                {
+                    "name": "平凡職業造就世界最強"
+                },
+                {
+                    "name": "白領羽球部"
+                }
+            ]
+        },
+        {
+            "team_name": "NC-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "SAKUGAN",
+                    "filter":[
+                        {
+                            "type": "exclude",
+                            "word": [
+                                "01",
+                                "02",
+                                "03",
+                                "04",
+                                "05"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "CC-Anima",
+            "type": "ongoing",
+            "filter": [
+                "2022Winter"
+            ],
+            "follow": [
+                {
+                    "name": "境界觸發者"
+                }
+            ]
+        },
+        {
+            "team_name": "CC-Anima",
+            "type": "bundle",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "[c.c動漫][10月新番][SAKUGAN / 迷宮標記者][01-12][合集][BIG5][1080P][MP4][新年快樂]",
+                    "regex": false
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "白金终局.*简繁内封",
+                    "regex": true
+                },
+                {
+                    "name": "魔法使的新娘 西之少年与青岚的骑士.*简繁内封",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "月与莱卡与吸血姬.*简繁内封",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "HYSUB",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "古见同学有交流障碍症",
+                    "filter": [
+                        {
+                            "type": "include",
+                            "word": [
+                                "BIG5"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "KissSub",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "蓝色时期.*简中",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "结城友奈是勇者 大满开之章"
+                },
+                {
+                    "name": "三角窗外是黑夜"
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "獻身給魔王伊伏洛基亞吧"
+                },
+                {
+                    "name": "燒窯的話也要馬克杯"
+                },
+                {
+                    "name": "Selection Project"
+                },
+                {
+                    "name": "萬能戰士無比敵"
+                },
+                {
+                    "name": "境界戰機"
+                },
+                {
+                    "name": "進化果實～不知不覺踏上勝利的人生～"
+                },
+                {
+                    "name": "吸血鬼馬上死"
+                },
+                {
+                    "name": "宿命迴響：命運節拍"
+                },
+                {
+                    "name": "Muv-Luv Alternative"
+                },
+                {
+                    "name": "橘色榮耀"
+                },
+                {
+                    "name": "世界頂尖的暗殺者轉生為異世界貴族"
+                },
+                {
+                    "name": "大正處女御伽話"
+                },
+                {
+                    "name": "白沙的 Aquatope"
+                },
+                {
+                    "name": "視覺監獄"
+                },
+                {
+                    "name": "水星領航員"
+                },
+                {
+                    "name": "前輩有夠煩"
+                },
+                {
+                    "name": "四季櫻"
+                },
+                {
+                    "name": "逆轉世界的電池少女"
+                },
+                {
+                    "name": "狂熱深淵 迷失的孩子"
+                },
+                {
+                    "name": "鍵等"
+                },
+                {
+                    "name": "緋紅結繫"
+                },
+                {
+                    "name": "陰陽眼見子"
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2020_2022"
+            ],
+            "follow": [
+                {
+                    "name": "数码宝贝大冒险",
+                    "filter": [
+                        {
+                            "type": "exclude",
+                            "word": [
+                                "[01]",
+                                "[02]",
+                                "[03]",
+                                "[04]",
+                                "[05]",
+                                "[06]",
+                                "[07]",
+                                "[08]",
+                                "[09]",
+                                "[10]",
+                                "[11]",
+                                "[12]",
+                                "[13]",
+                                "[14]",
+                                "[15]",
+                                "[16]",
+                                "[17]",
+                                "[18]",
+                                "[19]",
+                                "[21]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2021Summer"
+            ],
+            "follow": [
+                {
+                    "name": "小林家的龙女仆S",
+                    "filter": [
+                        {
+                            "type": "include",
+                            "word": [
+                                "[12]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Fall"
+            ],
+            "follow": [
+                {
+                    "name": "星期一的豐滿"
+                },
+                {
+                    "name": "加油吧同期醬"
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [
+                "2021SummerFall",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "贾希大人不气馁"
+                },
+                {
+                    "name": "幻变梦境"
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [
+                "2021Summer",
+                "1080p",
+                "chs"
+            ],
+            "follow": [
+                {
+                    "name": "Sonny Boy.*简体",
+                    "regex": true
+                },
+                {
+                    "name": "暗黑企业的迷宫"
+                },
+                {
+                    "name": "歌剧少女!!.*简体",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "XKsub",
+            "type": "ongoing",
+            "filter": [
+                "2021Summer"
+            ],
+            "follow": [
+                {
+                    "name": "小林家的龙女仆S",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "CC-Anima",
+            "type": "ongoing",
+            "filter": [
+                "2021Summer"
+            ],
+            "follow": [
+                {
+                    "name": "緋紅結繫",
+                    "filter": [
+                        {
+                            "type": "include",
+                            "word": [
+                                "01",
+                                "02"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Summer"
+            ],
+            "follow": [
+                {
+                    "name": "Tensei Shitara Slime Datta Ken S02"
+                },
+                {
+                    "name": "Re-Main"
+                },
+                {
+                    "name": "現實主義勇者的王國重建記"
+                },
+                {
+                    "name": "魔法科高中的優等生"
+                },
+                {
+                    "name": "我們的重製人生"
+                },
+                {
+                    "name": "女朋友 and 女朋友"
+                },
+                {
+                    "name": "轉生成女性向遊戲只有毀滅 END 的壞人大小姐 X"
+                },
+                {
+                    "name": "叫我對大哥",
+                    "filter": [
+                        {
+                            "type": "exclude",
+                            "word": [
+                                "WEB版"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "暮蟬悲鳴時 卒"
+                },
+                {
+                    "name": "桃子男孩渡海而來"
+                },
+                {
+                    "name": "偵探已經，死了。"
+                },
+                {
+                    "name": "死神少爺與黑女僕"
+                },
+                {
+                    "name": "開掛藥師的異世界悠閒生活"
+                },
+                {
+                    "name": "月光下的異世界之旅"
+                },
+                {
+                    "name": "Tokyo Revengers",
+                    "filter": [
+                        "1080p"
+                    ]
+                },
+                {
+                    "name": "平穩世代的韋駄天們"
+                },
+                {
+                    "name": "Love Live! Superstar"
+                },
+                {
+                    "name": "魔法紀錄 魔法少女小圓外傳 / Magi Reco S02"
+                }
+            ]
+        },
+        {
+            "team_name": "NC-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring"
+            ],
+            "follow": [
+                {
+                    "name": "煋红"
+                }
+            ]
+        },
+        {
+            "team_name": "NC-Raws",
+            "type": "ongoing",
+            "filter": [
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "鬼滅之刃 劇場版 - 無限列車篇"
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [
+                "2021",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "伊甸星原"
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [
+                "2021",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "海盗公主"
+                },
+                {
+                    "name": "海賊公主"
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021SpringSummer",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "給不滅的你"
+                }
+            ]
+        },
+        {
+            "team_name": "UHA-WINGS",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "不要欺负我，长瀞同学"
+                }
+            ]
+        },
+        {
+            "team_name": "Airota",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "小林家的女仆龙 - 迷你龙"
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "圣女魔力无所不能.*简繁内封",
+                    "regex": true
+                },
+                {
+                    "name": "本田小狼與我.*繁",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "Kamigami",
+            "type": "ongoing",
+            "filter": [
+                "2021SpringSummer",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "通灵王",
+                    "filter": [
+                        {
+                            "type": "include",
+                            "word": [
+                                "简繁日语字幕"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring",
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "真白之音"
+                },
+                {
+                    "name": "Nomad - Megalo Box S02"
+                },
+                {
+                    "name": "Vivy - Fluorite Eye's Song"
+                },
+                {
+                    "name": "再見了，我的克拉默"
+                },
+                {
+                    "name": "戰鬥員派遣中"
+                },
+                {
+                    "name": "灼熱卡巴迪"
+                },
+                {
+                    "name": "Zombieland Saga S02"
+                },
+                {
+                    "name": "變身成黑辣妹之後就和死黨上床了"
+                },
+                {
+                    "name": "Jouran - The Princess of Snow and Blood"
+                },
+                {
+                    "name": "持續狩獵史萊姆三百年，不知不覺就練到 LV MAX"
+                },
+                {
+                    "name": "影宅"
+                },
+                {
+                    "name": "轉生史萊姆日記"
+                },
+                {
+                    "name": "青梅竹馬絕對不會輸的戀愛喜劇"
+                },
+                {
+                    "name": "刮掉鬍子的我與撿到的女高中生"
+                },
+                {
+                    "name": "86 －不存在的戰區"
+                },
+                {
+                    "name": "七騎士：革命 -英雄的繼承者-"
+                },
+                {
+                    "name": "奇巧計程車"
+                }
+            ]
+        },
+        {
+            "team_name": "XKsub",
+            "type": "ongoing",
+            "filter": [
+                "2021Spring"
+            ],
+            "follow": [
+                {
+                    "name": "SSSS.DYNAZENON.*1080[pP]",
+                    "regex": true,
+                    "filter": [
+                        {
+                            "type": "exclude",
+                            "word": [
+                                "繁日內嵌",
+                                "Voice Drama"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "ongoing",
+            "filter": [
+                "2021Winter"
+            ],
+            "follow": [
+                {
+                    "name": "悠哉日常大王.*1080[pP].*60FPS",
+                    "regex": true,
+                    "filter": [
+                        {
+                            "type": "exclude",
+                            "word": [
+                                "繁日內嵌"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "[桜都字幕組] 動物狂想曲 第二季 / BEASTARS 2nd Season [01-12 Fin][1080p@60FPS][繁日內嵌]"
+                }
+            ]
+        },
+        {
+            "team_name": "Kamigami",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "记录的地平线 圆桌崩坏.*1080",
+                    "regex": true,
+                    "enable": false
+                },
+                {
+                    "name": "文豪野犬 汪.*1080[pP]",
+                    "regex": true
+                },
+                {
+                    "name": "[诸神字幕组][心理测量者 PSYCHO-PASS 3 FIRST INSPECTOR][BDRip][简繁日语字幕][1080P][HEVC MKV]"
+                }
+            ]
+        },
+        {
+            "team_name": "KTXP",
+            "type": "ongoing",
+            "filter": [
+                "2021Winter"
+            ],
+            "follow": [
+                {
+                    "name": "記錄的地平線",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "XKsub",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "五等分的新娘.*S2.*简繁日内封.*1080P",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "HYSUB",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "回复术士的重启人生.*GB.*1920",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "Nanabun no Nijuuni.*\\[2[0-9]\\].*1080p.*简.*",
+                    "regex": true
+                },
+                {
+                    "name": "Nanabun no Nijuuni.*\\[1[3-9]\\].*1080p.*简.*",
+                    "regex": true
+                },
+                {
+                    "name": "Nanabun no Nijuuni.*\\[01\\-12\\].*1080p.*简繁日外挂.*",
+                    "regex": true
+                },
+                {
+                    "name": "Yakusoku no Neverland S2.*1080.*繁",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "DR. Stone S02"
+                },
+                {
+                    "name": "總之就是很可愛",
+                    "regex": true
+                },
+                {
+                    "name": "請問您今天要來點兔子嗎？BLOOM",
+                    "regex": true
+                },
+                {
+                    "name": "戰翼的希格德莉法",
+                    "regex": true
+                },
+                {
+                    "name": "你與我最後的戰場，亦或是世界起始的聖戰",
+                    "regex": true
+                },
+                {
+                    "name": "在魔王城說晚安",
+                    "regex": true
+                },
+                {
+                    "name": "黃金神威 第三季",
+                    "regex": true
+                },
+                {
+                    "name": "無能力者娜娜",
+                    "regex": true
+                },
+                {
+                    "name": "魔法科高中的劣等生 來訪者篇",
+                    "regex": true
+                },
+                {
+                    "name": "成神之日",
+                    "regex": true
+                },
+                {
+                    "name": "炎炎消防隊 貳之章",
+                    "regex": true
+                },
+                {
+                    "name": "催眠麥克風",
+                    "regex": true
+                },
+                {
+                    "name": "在地下城尋求邂逅是否搞錯了什麼 第三季",
+                    "regex": true
+                },
+                {
+                    "name": "我立於百萬之上",
+                    "regex": true
+                },
+                {
+                    "name": "魔女之旅",
+                    "regex": true
+                },
+                {
+                    "name": "全員惡玉",
+                    "regex": true
+                },
+                {
+                    "name": "土下座跪求給看",
+                    "regex": true
+                },
+                {
+                    "name": "眾神眷顧的男人",
+                    "regex": true
+                },
+                {
+                    "name": "鐵路浪漫譚",
+                    "regex": true
+                },
+                {
+                    "name": "安達與島村",
+                    "regex": true
+                },
+                {
+                    "name": "出租女友",
+                    "regex": true
+                },
+                {
+                    "name": "暮蟬悲鳴時 業",
+                    "regex": true
+                },
+                {
+                    "name": "果然我的青春戀愛喜劇搞錯了。完",
+                    "regex": true
+                },
+                {
+                    "name": "Re：從零開始的異世界生活 第二季",
+                    "regex": true
+                },
+                {
+                    "name": "進擊的巨人",
+                    "regex": true
+                },
+                {
+                    "name": "強襲魔女 通往柏林之路",
+                    "regex": true
+                },
+                {
+                    "name": "天地創造設計部",
+                    "regex": true
+                },
+                {
+                    "name": "轉生成蜘蛛又怎樣",
+                    "regex": true
+                },
+                {
+                    "name": "這是個出身魔王關附近的少年在新手村生活的故事",
+                    "regex": true
+                },
+                {
+                    "name": "蒼之騎士團",
+                    "regex": true
+                },
+                {
+                    "name": "堀與宮村",
+                    "regex": true
+                },
+                {
+                    "name": "工作細胞 Black",
+                    "regex": true
+                },
+                {
+                    "name": "工作細胞 第二季",
+                    "regex": true
+                },
+                {
+                    "name": "無職轉生，到了異世界就拿出真本事",
+                    "regex": true
+                },
+                {
+                    "name": "Back Arrow",
+                    "regex": true
+                },
+                {
+                    "name": "EX-ARM",
+                    "regex": true
+                },
+                {
+                    "name": "怪物事變",
+                    "regex": true
+                },
+                {
+                    "name": "搖曳露營",
+                    "regex": true
+                },
+                {
+                    "name": "奇蛋物語",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "ongoing",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "咒术回战",
+                    "regex": true
+                },
+                {
+                    "name": "卡萝尔与洁丝蒂.*\\[01\\-24",
+                    "regex": true
+                },
+                {
+                    "name": "不死者之王 第三季 / Overlord III \\[01-13合集\\]",
+                    "regex": true
+                },
+                {
+                    "name": "Overlord II \\[01-13合集\\]",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人/Shingeki no Kyojin/Attack on Titan \\[S2 26-37 合集\\]",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin / Attack on Titan - 38-49 \\(S03E01-12\\) 修正合集",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin - 50-59 \\(S03E13-22\\) 修正合集",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin - 60",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin - 61",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin - 62",
+                    "regex": true
+                },
+                {
+                    "name": "进击的巨人 / Shingeki no Kyojin - 63",
+                    "regex": true
+                },
+                {
+                    "name": "里世界郊游",
+                    "regex": true
+                },
+                {
+                    "name": "突击莉莉",
+                    "regex": true
+                },
+                {
+                    "name": "顺其自然的日子",
+                    "regex": true
+                }
+            ]
+        },
+        {
+            "team_name": "LoliHouse",
+            "type": "bundle",
+            "filter": [
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "忧国的莫里亚蒂 / Yuukoku no Moriarty [01-11合集]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&千夏字幕组&LoliHouse] 捏造陷阱－NTR－ / Netsuzou Trap: NTR [BDRip 1080p HEVC-10bit FLAC][Reseed]"
+                },
+                {
+                    "name": "[LoliHouse] 小森拒不了! / Komori-san wa Kotowarenai! [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 爱生活! 艳阳天!! 爱克娅 - 咕噜咕噜油条! / Love Live! Sunshine!! Aqours - KU-RU-KU-RU Cruller! [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 来自风平浪静的明天 / Nagi no Asukara / 凪のあすから [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 赛马娘 第二季 / Uma Musume Pretty Derby Season 2 / ウマ娘 プリティーダービー Season 2 [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 梦想协奏曲！第二季 / BanG Dream! 2nd Season [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 梦想协奏曲！第三季 / BanG Dream! 3rd Season [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 关于我转生变成史莱姆这档事 第二季 / Tensei Shitara Slime Datta Ken 2nd Season [24.9-36合集][WebRip 1080p HEVC-10bit AAC][简繁英内封字幕]"
+                },
+                {
+                    "name": "[LoliHouse] EVA剧场版终 / Evangelion 3.0+1.01 Thrice Upon a Time [WebRip 1080p HEVC-10bit AAC][简繁英日字幕]"
+                },
+                {
+                    "name": "公主代理人 皇冠操纵者"
+                },
+                {
+                    "name": "[千夏&喵萌奶茶屋&LoliHouse] 妖精森林的小不点 / ハクメイとミコチ / Hakumei to Mikochi [BDRip 1080p HEVC-10bit FLAC][简繁外挂字幕]"
+                },
+                {
+                    "name": "[LoliHouse] 犬神同学和猫山同学 / Inugami-san to Nekoyama-san / 犬神さんと猫山さん [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[星空字幕组&LoliHouse] 言语如苏打般涌现 / Cider no You ni Kotoba ga Wakiagaru [WebRip 1080p HEVC-10bit AAC ASSx2][简繁日内封字幕]"
+                },
+                {
+                    "name": "[千夏字幕组&LoliHouse] 某科学的超电磁炮T / Toaru Kagaku no Railgun T [BDRip 1080p HEVC-10bit FLAC][Fin]"
+                },
+                {
+                    "name": "[LoliHouse] 不受欢迎之家 / HIMOTE HOUSE / ひもてはうす [BDRip 1080p HEVC-10bit FLAC]"
+                },
+                {
+                    "name": "[LoliHouse] 时钟机关之星 / Clockwork Planet [BDRip 1080p HEVC-YUV444-10bit FLAC][TV 01-12 Fin+SP]"
+                },
+                {
+                    "name": "[龙的牙医][The Dragon Dentist][01-02][WebRip 1920x1080 HEVC AAC][繁日外挂字幕][Fin]",
+                    "regex": false
+                },
+                {
+                    "name": "[喵萌奶茶屋&LoliHouse] 永远的831 / Eien no 831 [TVRip 1080p HEVC-10bit AAC][简繁日内封字幕]"
+                },
+                {
+                    "name": "[千夏字幕组&喵萌奶茶屋&LoliHouse] 少女与战车 最终章 / Girls und Panzer das Finale - 01 [BDRip 1920x1080 HEVC-yuv420p10 FLACx2][简繁外挂字幕]"
+                },
+                {
+                    "name": "[千夏字幕组&喵萌奶茶屋&LoliHouse] 少女与战车 最终章 第2话 / Girls und Panzer das Finale - 02 [BDRip 1080p HEVC-10bit FLAC][简繁外挂字幕]"
+                }
+            ]
+        },
+        {
+            "team_name": "UHA-WINGS",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "[为美好的世界献上祝福！红传说_Kono Subarashii Sekai ni Shukufuku wo! Movie][x264 1080p][简繁外挂]"
+                }
+            ]
+        },
+        {
+            "team_name": "Sakurato",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "[桜都字幕组] 入間同學入魔了！第2季 / Mairimashita! Iruma-kun S2 [1-21][1080P@96FPS][简繁内封]"
+                },
+                {
+                    "name": "[桜都字幕组] 剧场版 少女☆歌剧 Revue Starlight/ Shoujo☆Kageki Revue Starlight Movie[BDRip][1080P][简繁內封]"
+                }
+            ]
+        },
+        {
+            "team_name": "FS-Raw",
+            "type": "bundle",
+            "filter": [],
+            "regex": false,
+            "follow": [
+                {
+                    "name": "【桜都字幕组&FS-Raw】[盾之勇者成名录/Tate no Yuusha no Nariagari][01-25End][HEVC-10Bit-2160P AAC][外挂GB/BIG5][WEB-Rip][MKV+ass]"
+                }
+            ]
+        },
+        {
+            "team_name": "DMG",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "【澄空学园&动漫国字幕组】★年末特番[魔法科高中的劣等生 追忆篇][1080P][简体][MP4][v2]"
+                }
+            ]
+        },
+        {
+            "team_name": "Lilith-Raws",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "[Lilith-Raws] 學戰都市 Asterisk / Gakusen Toshi Asterisk [01-12][Baha][WEB-DL][1080p][AVC AAC][CHT][MP4]"
+                },
+                {
+                    "name": "[Lilith-Raws] 學戰都市 Asterisk / Gakusen Toshi Asterisk S02 [01-12][Baha][WEB-DL][1080p][AVC AAC][CHT][MP4]"
+                },
+                {
+                    "name": "[Lilith-Raws] 小鳥遊六花・改 劇場版 中二病也想談戀愛！[Baha][WEB-DL][1080p][AVC AAC][CHT][MP4]"
+                }
+            ]
+        },
+        {
+            "team_name": "MMSUB",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "【MMSUB】[境界触发者 第2季 / World Trigger 2nd Season][01~12][WebRip 1080p HEVC-10bit AAC][简繁内封字幕]",
+                    "regex": false
+                }
+            ]
+        },
+        {
+            "team_name": "MCE",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "【MCE汉化组】[剧场版 酷爱电影的庞波小姐][Eiga Daisuki Pompo-san][映画大好きポンポさん][简体][1080P][x264 AAC]",
+                    "regex": false
+                }
+            ]
+        },
+        {
+            "team_name": "Nekomoe_kissaten",
+            "type": "bundle",
+            "filter": [
+                "1080p"
+            ],
+            "follow": [
+                {
+                    "name": "龙与雀斑公主"
+                }
+            ]
+        },
+        {
+            "team_name": "NC-Raws",
+            "type": "bundle",
+            "filter": [],
+            "follow": [
+                {
+                    "name": "[NC-Raws] Fate／Grand Order 神圣圆桌领域卡美洛 后篇 Paladin; Agateram - 01 (B-Global 1920x1080 HEVC AAC MKV)"
+                },
+                {
+                    "name": "[NC-Raws] 約會大作戰 DATE A BULLET 赤黑新章：紅或白 / DATE A BULLET - 電影 [Baha][WEB-DL][1080p][AVC AAC][CHT][MP4]"
+                },
+                {
+                    "name": "[NC-Raws] 約會大作戰 DATE A BULLET 赤黑新章：虛或實 / DATE A BULLET - 電影 [Baha][WEB-DL][1080p][AVC AAC][CHT][MP4]"
+                }
+            ]
+        },
+        {
+            "team_name": "VCB-Studio",
+            "type": "bundle",
+            "regex": false,
+            "filter": [],
+            "follow": [
+                {
+                    "name": "[VCB-Studio] Seikon no Qwaser / 圣痕炼金士 / 聖痕のクェイサー 10-bit 1080p HEVC BDRip [S1-S2 + OVA Reseed Fin]"
+                },
+                {
+                    "name": "[诸神字幕组&VCB-Studio] Boku dake ga Inai Machi / 只有我不存在的城市 / 僕だけがいない街 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[动漫国字幕组&风之圣殿&VCB-Studio] Princess Connect! Re:Dive / 公主连结Re:Dive / プリンセスコネクト! Re:Dive 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[紫音字幕组&VCB-Studio] Gekkan Shoujo Nozaki-kun / 月刊少女野崎君 / 月刊少女野崎くん 10-bit 1080p AVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[诸神字幕组&幻之字幕组&VCB-Studio] GIRLS und PANZER / 少女与战车 / ガールズ&パンツァー 10-bit 1080p HEVC BDRip [ TV + OVA + MOVIE Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] White Album / 白色相簿 / ホワイトアルバム 10-bit 720p AVC BDRip [Reseed V3 Fin]"
+                },
+                {
+                    "name": "[流云字幕组&VCB-Studio] TARI TARI 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[LoveEcho!&VCB-Studio] Lovelive! The School Idol Movie / Love Live! 学园偶像剧场版 10bit 1080p HEVC BDRip [Reseed MOVIE Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Jitsu wa Watashi wa / 其实我是 / 実は私は 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Amaama to Inazuma / 天真与闪电 / 甘々と稲妻 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] To LOVE-Ru / 出包王女 / To LOVEる -とらぶる- 10-bit 1080p/720p HEVC/AVC BDRip/DVDRip [S1-S4 + OAD Reseed Fin]"
+                },
+                {
+                    "name": "[幻之字幕组&诸神字幕组&极影字幕社&VCB-Studio] Saenai Heroine no Sodatekata Fine / 路人女主的养成方法 Fine 10-bit 1080p HEVC BDRip [MOVIE Rev]"
+                },
+                {
+                    "name": "[VCB-Studio] Paprika / 红辣椒 / パプリカ 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[诸神字幕组&VCB-Studio] 亚人 / Ajin / 亜人 10-bit 1080p HEVC BDRip [S1+S2+MOVIE Fin]"
+                },
+                {
+                    "name": "Non Non Biyori Vacation / 悠哉日常大王 Vacation / 劇場版 のんのんびより ばけーしょん 10-bit 1080p HEVC BDRip [MOVIE Fin]"
+                },
+                {
+                    "name": "Non Non Biyori / 悠哉日常大王 / のんのんびより 10-bit 1080p HEVC BDRip [S1+S2+OADs Fin]"
+                },
+                {
+                    "name": "[诸神字幕组&VCB-Studio] Ansatsu Kyoushitsu / 暗杀教室 / 暗殺教室 10-bit 1080p HEVC BDRip [S1-S2 Reseed Fin]"
+                },
+                {
+                    "name": "[豌豆字幕组&VCB-Studio] Ansatsu Kyoushitsu / 暗杀教室 / 暗殺教室 10-bit 1080p HEVC BDRip [MOVIE + OVA + WEB]"
+                },
+                {
+                    "name": "[VCB-Studio] Uchuu Patrol Luluco / 宇宙巡警露露子 / 宇宙パトロールルル子 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kokuhaku Jikkou Iinkai Ren'ai Series / 告白实行委员会～恋爱系列～ 10-bit 1080p HEVC BDRip [TV + MOVIE Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kakegurui / 狂赌之渊 / 賭ケグルイ 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[EggPain-Raws&VCB-Studio] School Days / 日在校园 / スクールデイズ 10-bit 1080p AVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Strike the Blood 10-bit 1080p HEVC BDRip [TV Reseed + OVA1 Rev]"
+                },
+                {
+                    "name": "虚构推理"
+                },
+                {
+                    "name": "[VCB-Studio] Kamisama no Memochou / 神的记事本 / 神様のメモ帳 10-bit 1440p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[SweetSub&VCB-Studio] Blade Runner Black Out 2022 / 银翼杀手：黑暗浩劫2022 10-bit 1080p HEVC BDRip [WEB]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Koisuru Asteroid / 恋爱小行星 / 恋する小惑星 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Utawarerumono: Itsuwari no Kamen / 传颂之物 虚伪的假面 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "五等分的花嫁"
+                },
+                {
+                    "name": "BEASTARS"
+                },
+                {
+                    "name": "[豌豆字幕组&风之圣殿&VCB-Studio] Yakusoku no Neverland / 约定的梦幻岛 / 約束のネバーランド 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Yuru Camp / 摇曳露营 / ゆるキャン 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] One-Punch Man / 一拳超人 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "Log Horizon / 记录的地平线"
+                },
+                {
+                    "name": "记录的地平线第2季"
+                },
+                {
+                    "name": "[VCB-Studio] Last Exile: Ginyoku no Fam / 最终流放-银翼之法姆- / ラストエグザイル-銀翼のファム- 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[诸神字幕组&幻之字幕组&VCB-Studio] GIRLS und PANZER / 少女与战车 / ガールズ&パンツァー 10-bit 1080p HEVC BDRip [ TV + OVA + MOVIE Reseed Fin]"
+                },
+                {
+                    "name": "[紫音字幕组&VCB-Studio] Gekkan Shoujo Nozaki-kun / 月刊少女野崎君 / 月刊少女野崎くん 10-bit 1080p AVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[樱律字幕组&VCB-Studio] Saikin, Imouto no Yousu ga Chotto Okashiinda ga / 最近，妹妹的样子有点怪？ 10-bit 1080p AVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Seikon no Qwaser / 圣痕炼金士 / 聖痕のクェイサー 10-bit 1080p HEVC BDRip [S1-S2 + OVA Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Fate/stay night Heaven's Feel III.spring song 10-bit 1080p HEVC BDRip [Early Release]"
+                },
+                {
+                    "name": "[千夏&VCB-Studio] Fate/stay night Heaven's Feel I.presage flower / 命运/停驻之夜 天之杯 1.预示之花 10-bit 1080p HEVC BDRip [Movie Reseed Fin]"
+                },
+                {
+                    "name": "[千夏&VCB-Studio] Fate/stay night Heaven's Feel Ⅱ.lost butterfly / 命运/停驻之夜 天之杯 2.迷失之蝶 10-bit 1080p HEVC BDRip [Movie Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] SAO: Alicization - War of Underworld / 刀剑神域 Alicization篇 War of Underworld 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kobayashi-san Chi no Maid Dragon / 小林家的龙女仆 / 小林さんちのメイドラゴン 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Gekijouban SHIROBAKO / 剧场版 白箱 / 劇場版SHIROBAKO 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[千夏&VCB-Studio] Fate/stay night Heaven's Feel III.spring song / 命运/停驻之夜 天之杯 3.春之歌 10-bit 1080p HEVC BDRip [Movie Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Fullmetal Alchemist: Brotherhood / 钢之炼金术师 / 鋼の錬金術師 10-bit 1080p HEVC FLAC [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio&philosophy-raws] Absolute Duo / 绝对双刃 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[SweetSub&VCB-Studio] Umibe no Etranger / 海边的异邦人 / 海辺のエトランゼ 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[VCB-Studio] Uma Musume Pretty Derby / 赛马娘 / ウマ娘 プリティーダービー 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[茉语星梦&风之圣殿&VCB-Studio] Princess Principal / 公主代理人 / プリンセス・プリンシパル 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[千夏字幕组&VCB-Studio] Fragtime / 时光碎片 / フラグタイム 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Kekkai Sensen & Beyond / 血界战线 & BEYOND / 血界戦線 & BEYOND 10-bit 1080p HEVC BDRip [TV + OAD/OVA Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Zombie Land Saga Revenge / 佐贺偶像是传奇 卷土重来 / ゾンビランドサガ リベンジ 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Fate/Zero 10-bit 1080p HEVC BDRip [Reseed v2 Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Fate/Stay Night 10-bit 1080p HEVC BDRip [Reseed Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Fate/Stay Night Unlimited Blade Works 两季度全 10bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[SweetSub&VCB-Studio] Kaijuu no Kodomo / 海兽的孩子 / 海獣の子供 10-bit 1080p HEVC BDRip [MOVIE Reseed]"
+                },
+                {
+                    "name": "[千夏字幕组&VCB-Studio] Sagrada Reset / 重启咲良田 / サクラダリセット 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kino no Tabi: The Beautiful World / 奇诺之旅(2017) -the Beautiful World- 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kokoro Connect / 心灵链环 / ココロコネクト 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] PSYCHO-PASS 3 / 心理测量者 第三季 / サイコパス3 10-bit 1080p HEVC BDRip [TV + MOVIE Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Persona4 / 女神异闻录4 10-bit 1080p HEVC BDRip [Original + Golden Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Gekijouban Bang Dream! Episode of Roselia / 剧场版 BanG Dream! Episode of Roselia 10-bit 1080p HEVC BDRip [MOVIE Fin]"
+                },
+                {
+                    "name": "[VCB-Studio&LoliHouse] Yuuki Yuuna wa Yuusha de Aru / 结城友奈是勇者 / 結城友奈は勇者である 10-bit 1080p HEVC BDRip [S1-S2 + MOVIE Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Final Fantasy VII Advent Children / 最终幻想Ⅶ 圣子降临 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[VCB-S] Kaguya-sama wa Kokurasetai? Tensai-tachi no Ren'ai Zunousen / 辉夜大小姐想让我告白？～天才们的恋爱头脑战～ 10-bit 1080p HEVC BDRip [S2 Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] The Severing Crime Edge / 断裁分离的罪恶之剪 / 断裁分離のクライムエッジ 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] The Tatami Galaxy / 四叠半神话大系 / 四畳半神話大系 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Kageki Shojo!! / 歌剧少女！！ / かげきしょうじょ!! 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌Production&VCB-Studio] Love Live! Superstar!! / 爱生活! 超级大明星!! / ラブライブ！スーパースター!! 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[星空字幕组&SweetSub&VCB-Studio] Sonny Boy / 漂流少年 / サニーボーイ 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] K-On! / 轻音少女 / けいおん! 10-bit 1080p HEVC BDRip [S1-S2 + MOVIE + LIVE Rev Fin]"
+                },
+                {
+                    "name": "[动漫国字幕组&VCB-Studio] Eiga Daisuki Pompo-san / 酷爱电影的庞波小姐 / 映画大好きポンポさん 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[VCB-Studio] Kono Sekai no (Sara ni Ikutsumono) Katasumi ni / 在这世界（更多一些）的角落 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[紫音字幕组&VCB-Studio] White Album 2 / 白色相簿2 / ホワイトアルバム2 10-bit 1080p AVC BDRip [Reseed V4 Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Kanojo, Okarishimasu / 租借女友 / 彼女, お借りします 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Ore no Kanojo to Osananajimi ga Shuraba Sugiru / 我女友与青梅竹马的惨烈修罗场 / 俺の彼女と幼なじみが修羅場すぎる 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Tensura Nikki / 转生史莱姆日记 / 転スラ日記 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Vivy -Fluorite Eye's Song- / 薇薇 -萤石眼之歌- / ヴィヴィ -フローライトアイズソング- 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[幻之字幕组&VCB-S] Fate/Kaleid Liner Prisma Illya Licht: Namae no Nai Shoujo / 剧场版 魔法少女伊莉雅 无名的少女 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[动漫国字幕组&VCB-Studio] Bokutachi no Remake / 我们的重制人生 / ぼくたちのリメイク 8-bit 1080p AVC BDRip [MP4 CHS Ver]"
+                },
+                {
+                    "name": "[VCB-Studio] Seirei Gensouki / 精灵幻想记 / 精霊幻想記 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[悠哈璃羽字幕社&VCB-Studio] Kishuku Gakkou no Juliet / 寄宿学校的朱丽叶 / 寄宿学校のジュリエット 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Higurashi no Naku Koro ni / 寒蝉鸣泣之时 / ひぐらしのなく頃に 10-bit 720p/1080p HEVC BDRip/DVDRip [S1-S4 + OVAs Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Seirei Gensouki / 精灵幻想记 / 精霊幻想記 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Maou Gakuin no Futekigousha / 魔王学院的不适任者 / 魔王学院の不適合者 10-bit 1080p HEVC BDRip [S1 Fin]"
+                },
+                {
+                    "name": "[动漫国字幕组&VCB-Studio] Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e / 欢迎来到实力至上主义教室 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] Netoge no Yome wa Onna no Ko Janai to Omotta? / 线上游戏的老婆不可能是女生？ 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] LoveLive! Sunshine!! / ラブライブ！サンシャイン！！ 10-bit 1080p HEVC BDRip [S2 Fin]"
+                },
+                {
+                    "name": "[VCB-Studio] LoveLive!Sunshine!! Over the Rainbow / ラブライブ！サンシャイン!! Over the Rainbow 10-bit 1080p HEVC BDRip [MOVIE]"
+                },
+                {
+                    "name": "[Nyamazing&VCB-Studio] LoveLive! Sunshine!! / ラブライブ！サンシャイン!! 10bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[LoveEcho!&VCB-Studio] Love Live! 2nd Season/ラブライブ! 2nd Season 10bit 1080p HEVC BDRip [S2 Fin]"
+                },
+                {
+                    "name": "[LoveEcho!&白月字幕组&VCB-Studio] Love Live! School Idol Project/Love Live! 学园偶像计划 10bit 1080p HEVC BDRip (Reseed)"
+                },
+                {
+                    "name": "[VCB-Studio] Kakegurui ×× / 狂赌之渊×× / 賭ケグルイ×× 10-bit 1080p HEVC BDRip [Fin]"
+                },
+                {
+                    "name": "[喵萌奶茶屋&VCB-Studio] Gyakuten Sekai no Denchi Shoujo / 逆转世界的电池少女 / 逆転世界ノ電池少女 10-bit 1080p HEVC BDRip [Fin]"
+                }
+            ]
+        }
+    ],
+    "notify": [
+        {
+            "team_name": "LoliHouse",
+            "filter": [
+                {
+                    "type": "include",
+                    "word_content": [
+                        "原盘"
+                    ]
+                }
+            ]
+        },
+        {
+            "team_name": "VCB-Studio"
+        }
+    ]
+}
