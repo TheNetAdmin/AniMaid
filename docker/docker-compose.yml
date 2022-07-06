@@ -7,14 +7,12 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Europe/London
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=9001
     volumes:
       - /mnt/animaid/Config:/config
       - /mnt/animaid/Download:/downloads
     ports:
-      - 8080:8080
+      - 9001:9001
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
-
-secrets:
