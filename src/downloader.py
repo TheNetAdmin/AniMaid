@@ -45,7 +45,7 @@ class qbittorrent(downloader):
     def get_info(self, hashes: List[Dict]) -> dict:
         all_info = self.get_all_info()
         res = dict()
-        for magnet_hash in hases:
+        for magnet_hash in hashes:
             if magnet_hash in all_info.keys():
                 res[magnet_hash] = all_info[magnet_hash]
         return res
