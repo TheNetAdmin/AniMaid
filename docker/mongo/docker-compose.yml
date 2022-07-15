@@ -12,9 +12,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     network_mode: host
-    secrets:
-      - mongo_username
-      - mongo_password
 
   mongo-express:
     image: mongo-express
@@ -26,9 +23,6 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
     network_mode: host
-    secrets:
-      - mongo_username
-      - mongo_password
 
 secrets:
 
