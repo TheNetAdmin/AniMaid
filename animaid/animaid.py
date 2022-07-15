@@ -5,7 +5,7 @@ import qbittorrent.qbittorrent as qbt
 
 with Flow("qBittorrent") as flow:
     qbt_addr = Parameter("qbt_addr", default="localhost")
-    qbt_port = Parameter("qbt_port", default=8080)
+    qbt_port = Parameter("qbt_port", default=9001)
     qbt_user = Parameter("qbt_user", default="admin")
     qbt_pass = Parameter("qbt_pass", default="adminadmin")
 

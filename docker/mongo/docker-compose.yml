@@ -1,0 +1,37 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: /run/secrets/mongo_username
+      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/mongo_password
+    secrets:
+      - mongo_username
+      - mongo_password
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: /run/secrets/mongo_username
+      ME_CONFIG_MONGODB_ADMINPASSWORD: /run/secrets/mongo_password
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    secrets:
+      - mongo_username
+      - mongo_password
+
+secrets:
+
+  mongo_username:
+    file: secrets/data/mongo/username
+    
+  mongo_password:
+    file: secrets/data/mongo/password
