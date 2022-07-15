@@ -1,6 +1,3 @@
-networks:
-  prefect-server:
-    name: prefect-server
 services:
   apollo:
     command: bash -c "./post-start.sh && npm run serve"
@@ -22,8 +19,7 @@ services:
         &> /dev/null || exit 1
       timeout: 2s
     image: prefecthq/apollo:core-1.2.3
-    networks:
-      prefect-server: null
+    network_mode: host
     ports:
     - 127.0.0.1:4200:4200/tcp
     restart: always
@@ -45,8 +41,7 @@ services:
         1
       timeout: 2s
     image: prefecthq/server:core-1.2.3
-    networks:
-      prefect-server: null
+    network_mode: host
     ports:
     - 127.0.0.1:4201:4201/tcp
     restart: always
@@ -70,8 +65,7 @@ services:
       timeout: 2s
     image: hasura/graphql-engine:v2.1.1
     init: true
-    networks:
-      prefect-server: null
+    network_mode: host
     ports:
     - 127.0.0.1:3000:3000/tcp
     restart: always
@@ -91,8 +85,6 @@ services:
       test: pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER} || exit 1
       timeout: 2s
     image: postgres:11
-    networks:
-      prefect-server: null
     ports:
     - 127.0.0.1:5432:5432/tcp
     restart: always
@@ -104,8 +96,7 @@ services:
       PREFECT_SERVER__HASURA__ADMIN_SECRET: hasura-secret-admin-secret
       PREFECT_SERVER__HASURA__HOST: hasura
     image: prefecthq/server:core-1.2.3
-    networks:
-      prefect-server: null
+    network_mode: host
     restart: always
   ui:
     command: /intercept.sh
@@ -119,8 +110,7 @@ services:
       test: curl --fail --silent --head "http://ui:8080/" &> /dev/null || exit 1
       timeout: 5s
     image: prefecthq/ui:core-1.2.3
-    networks:
-      prefect-server: null
+    network_mode: host
     ports:
     - 8080:8080/tcp
     restart: always

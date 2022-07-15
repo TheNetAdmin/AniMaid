@@ -8,6 +8,8 @@ services:
       - PGID=0
       - TZ=Europe/London
       - WEBUI_PORT=9001
+      - USERNAME=${QBITTORRENT_USERNAME}
+      - PASSWORD=${QBITTORRENT_PASSWORD}
     volumes:
       - /mnt/animaid/Config:/config
       - /mnt/animaid/Download:/downloads
@@ -16,3 +18,4 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+    network_mode: host
