@@ -17,7 +17,6 @@ function export_secrets() {
 function docker_compose() {
     docker compose                        \
         -f qbittorrent/docker-compose.yml \
-        -f prefect/docker-compose.yml     \
         -f mongo/docker-compose.yml       \
         --project-directory $PWD          \
         $*                                \
