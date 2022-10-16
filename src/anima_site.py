@@ -91,6 +91,8 @@ class bangumi_moe_site(site):
                 f"No data responded, something is wrong with the request to bangumi.moe, url: {url}",
                 extra={"info": {"url": url}},
             )
+        if 'errno' in res.keys():
+            raise Exception(f'Failed to call [{url}], result [{res}]')
         return res
 
     def search_by_team(self, team, page, ignore_properties=["introduction"]):
@@ -104,6 +106,10 @@ class bangumi_moe_site(site):
     def search_by_torrent(self, torrent_id):
         url = f"https://bangumi.moe/api/v2/torrent/{torrent_id}"
         res = requests.get(url=url).json()
+        if 'errno' in res.keys():
+            # raise Exception(f'Failed to call [{url}], result [{res}]')
+            # Temporary fix for the 500 error of https://bangumi.moe/api/v2/torrent/634ad0306b7b6500071e3b37
+            return None
         if len(res) == 0:
             return None
         return res
