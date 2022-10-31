@@ -66,7 +66,7 @@ class bangumi_moe_site(site):
 
     def _search(self, url, ignore_properties=["introduction"]):
         try:
-            res = requests.get(url=url, timeout=10).json()
+            res = requests.get(url=url, timeout=30).json()
         except JSONDecodeError as e:
             self.logger.error(f"Anima site request is invalid, url: {url}")
             raise Exception(f"Anima site request is invalid, url: {url}")
