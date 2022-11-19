@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .filter import make_filter
 from .utils import chdir, chmkdir
+from typing import Tuple
 
 
 class renamer:
@@ -27,7 +28,7 @@ class renamer:
         else:
             self.entries = rule["entries"]
 
-    def apply(self, target: Path, typ) -> (Path, bool):
+    def apply(self, target: Path, typ) -> Tuple[Path, bool]:
         # Check file type
         if self.file == "dir" and typ == "file":
             return target, False
@@ -165,7 +166,7 @@ class organizer:
                         else:
                             if t != nt:
                                 raise Exception(
-                                    f"Rule [{m.desc:40}] not applied but path changed from {t} to {nt}"
+                                    f"Rule [{r.desc:40}] not applied but path changed from {t} to {nt}"
                                 )
                     self.logger.debug(f'    --[{"Final result":40}]-->{t}')
                     target_files[typ][i] = t
