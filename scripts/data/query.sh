@@ -5,7 +5,7 @@
 curr_path="$(realpath "$(dirname "$0")")"
 
 jq \
-    '.[] | select(.team.name | test("VCB-Studio")) | select(.title | test("Love Live") ) | {title: .title, time: .publish_time}' \
+    '.[] | select(.title | test("Kinsou no Vermeil") ) | {title: .title, time: .publish_time, team_name: .team.name}' \
     "${curr_path}/bangumi_moe.json"    \
     | tee "${curr_path}/query_result.json" \
 ;

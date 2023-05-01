@@ -81,7 +81,7 @@ class bangumi_moe_site(site):
                 reverse=True,
             )
         except KeyError as e:
-            self.logger.error(f"Invalid response {res}")
+            self.logger.error(f"Invalid response {res}, url [{url}]")
             raise e
         for t in res["torrents"]:
             for i in ignore_properties:
