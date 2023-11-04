@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import contextlib
 import json
 import logging

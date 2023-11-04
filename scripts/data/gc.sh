@@ -19,7 +19,7 @@ jq \
 
 function backup_then_gc {
     bash "${curr_path}/backup.sh"
-    jq "del(.[length-${num_elements}:length)" "${curr_path}/download.json" > "${curr_path}/download-gced.json"
+    jq "del(.[length-${num_elements}:length])" "${curr_path}/download.json" > "${curr_path}/download-gced.json"
     mv "${curr_path}/download.json"           "${curr_path}/download-pre-gc.json"
     mv "${curr_path}/download-gced.json"      "${curr_path}/download.json"
 }
