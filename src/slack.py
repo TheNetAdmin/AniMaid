@@ -15,6 +15,10 @@ class slack_client:
         self.client.post(blocks=msg_block)
 
     def _notify_records(self, main_text, records=[]):
+        if len(records) > 20:
+            self.logger.warning(f"Too many records: {len(records)}, capping at 20")
+            records = records[:20]
+
         msg_block = [
             {"type": "section", "text": {"type": "mrkdwn", "text": main_text}},
             {"type": "divider"},

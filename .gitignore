@@ -4,6 +4,7 @@ config
 config/*
 /data
 /data/*
+/files
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

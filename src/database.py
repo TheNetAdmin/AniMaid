@@ -162,6 +162,12 @@ class download_database(base_database):
                             f'Download error for {entry["title"]}',
                             extra={"record": entry["record"]},
                         )
+                    if "use-115" in status[magnet_hash].tags:
+                        self.logger.warning(
+                            f'Download stalled for {entry["title"]}, it should be moved to 115 for downloading',
+                            extra={"record": entry["record"]},
+                        )
+                        entry["download_status"] = "download-stalled-use-115"
                 else:
                     if entry["download_status"] != "needDownload":
                         entry["download_status"] = "unknown"
@@ -353,7 +359,7 @@ class bangumi_moe_database(base_database):
             log_info(f'Updating [{team["alias"]:20}]')
             cnt_new_records = 0
             for p in range(max_pages):
-                sleep(2)
+                sleep(3)
                 log_info(f"Page [{p}]")
                 records = self.site.search_by_team(team, p, [])["torrents"]
                 if "team_tag_id" in team:
