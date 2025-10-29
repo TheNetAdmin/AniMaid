@@ -3,6 +3,9 @@ set -e
 set -x
 curr_path=$(realpath $(dirname $0))
 cd "$curr_path/.."
+
+mount -a
+
 python3 animaid.py update -a
 python3 animaid.py download
 
